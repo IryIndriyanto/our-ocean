@@ -66,7 +66,7 @@ import {
         bg={navbarBg}
         borderColor={navbarBorder}
         filter={navbarFilter}
-        backdropFilter={navbarBackdrop}
+        // backdropFilter={navbarBackdrop}
         backgroundPosition='center'
         backgroundSize='cover'
         borderRadius='16px'
@@ -111,40 +111,7 @@ import {
           alignItems={{ xl: 'center' }}
           mb={gap}
         >
-          <Box mb={{ sm: '8px', md: '0px' }}>
-            <Breadcrumb>
-              <BreadcrumbItem color={secondaryText} fontSize='sm' mb='5px'>
-                <BreadcrumbLink href='#' color={secondaryText}>
-                  Pages
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-  
-              <BreadcrumbItem color={secondaryText} fontSize='sm'>
-                <BreadcrumbLink href='#' color={secondaryText}>
-                  {brandText}
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-            </Breadcrumb>
-            <Link
-              color={mainText}
-              href='#'
-              bg='inherit'
-              borderRadius='inherit'
-              fontWeight='bold'
-              fontSize='34px'
-              _hover={{ color: { mainText } }}
-              _active={{
-                bg: 'inherit',
-                transform: 'none',
-                borderColor: 'transparent'
-              }}
-              _focus={{
-                boxShadow: 'none'
-              }}
-            >
-              {brandText}
-            </Link>
-          </Box>
+          
           <Box ms='auto' w={{ sm: '100%', md: 'unset' }}>
             <HeaderLinks
               onOpen={props.onOpen}
