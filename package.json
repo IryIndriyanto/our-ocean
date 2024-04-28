@@ -14,11 +14,15 @@
     "@chakra-ui/react": "^2.8.2",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
+    "@types/leaflet": "^1.9.12",
     "framer-motion": "^11.1.7",
+    "leaflet": "^1.9.4",
+    "leaflet-defaulticon-compatibility": "^0.1.2",
     "next": "14.2.3",
     "react": "^18",
     "react-dom": "^18",
-    "react-icons": "^5.1.0"
+    "react-icons": "^5.1.0",
+    "react-leaflet": "^4.2.1"
   },
   "devDependencies": {
     "@types/node": "^20",

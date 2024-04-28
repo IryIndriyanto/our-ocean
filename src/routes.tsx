@@ -11,9 +11,9 @@ import { IRoute } from '@/types/navigation';
 
 const routes: IRoute[] = [
   {
-    name: 'Navigation',
+    name: 'Map',
     layout: '/main',
-    path: '/default',
+    path: '/map',
     icon: <Icon as={MdHome} width="20px" height="20px" color="inherit" />,
   },
   {
