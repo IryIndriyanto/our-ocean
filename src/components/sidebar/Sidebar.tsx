@@ -42,7 +42,7 @@ function Sidebar(props: SidebarProps) {
 
   // SIDEBAR
   return (
-    <Box display={{ sm: 'none', xl: 'block' }} position="fixed" minH="100%">
+    <Box zIndex='1' display={{ sm: 'none', xl: 'block' }} position="fixed" minH="100%">
       <Box
         bg={sidebarBg}
         transition={variantChange}
