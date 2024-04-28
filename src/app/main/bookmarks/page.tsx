@@ -1,7 +1,5 @@
 "use client";
 
-import Map from "@/components/maps/Map";
-import { MapComponent } from "@/components/maps";
 import {
   Box,
   Flex,
@@ -18,7 +16,8 @@ export default function Default() {
 
   return (
     <>
-      <MapComponent />
+      <div>this is bookmarks page</div>
+      <Box h={'150vh'}>ini box</Box>
     </>
   );
 }

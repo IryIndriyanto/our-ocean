@@ -3,7 +3,7 @@ import { IRoute } from "@/types/navigation";
 // NextJS Requirement
 export const isWindowAvailable = () => typeof window !== "undefined";
 
-export const findCurrentRoute = (routes: IRoute[]): IRoute => { 
+export const findCurrentRoute = (routes: IRoute[]): IRoute => {
   const foundRoute: IRoute | undefined = routes.find(
     (route) =>
       isWindowAvailable() &&
@@ -13,10 +13,21 @@ export const findCurrentRoute = (routes: IRoute[]): IRoute => {
 
   if (!foundRoute) {
     // Handle the case where no route is found
-    throw new Error('No current route found');
+    return getDefaultRoute();
   }
-
   return foundRoute;
+};
+
+const getDefaultRoute = (): IRoute => {
+  // Define your default route here
+  const defaultRoute: IRoute = {
+    name: "Map",
+    layout: "/main",
+    path: "/map",
+    icon: "",
+  };
+
+  return defaultRoute;
 };
 
 export const getActiveRoute = (routes: IRoute[]): string => {

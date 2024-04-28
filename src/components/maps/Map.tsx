@@ -8,12 +8,11 @@ import {
 } from "react-leaflet";
 import { icon } from "leaflet";
 
+const ICON = icon({
+  iconUrl: "/marker.png",
+  iconSize: [30, 40],
+});
 export default function Map() {
-  const ICON = icon({
-    iconUrl: "/marker.png",
-    iconSize: [30, 40],
-  });
-
   return (
     <MapContainer
       style={{ height: "100vh", zIndex: "0" }}
@@ -22,7 +21,7 @@ export default function Map() {
       zoomControl={false}
     >
       <ClickComponent />
-      <ZoomControl position="bottomright"/>
+      <ZoomControl position="bottomright" />
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
