@@ -18,12 +18,12 @@ import {
   getActiveRoute,
 } from '@/utils/navigation';
 
-interface DashboardLayoutProps extends PropsWithChildren {
-  [x: string]: any;
-}
+// interface DashboardLayoutProps extends PropsWithChildren {
+//   [x: string]: any;
+// }
 
 // Custom Chakra theme
-export default function AdminLayout(props: DashboardLayoutProps) {
+export default function AdminLayout(props:any) {
   const { children, ...rest } = props;
   // states and functions
   const [fixed] = useState(false);
