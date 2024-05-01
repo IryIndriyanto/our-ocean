@@ -21,7 +21,6 @@ import { ItemContent } from '@/components/menu/ItemContent';
 import { SearchBar } from '@/components/navbar/searchBar/SearchBar';
 import { SidebarResponsive } from '@/components/sidebar/Sidebar';
 // Assets
-import { FaEthereum } from 'react-icons/fa';
 import { IoMdMoon, IoMdSunny } from 'react-icons/io';
 import { MdNotificationsNone } from 'react-icons/md';
 import routes from '@/routes';
@@ -187,18 +186,11 @@ export default function HeaderLinks(props: {
             <MenuItem
               _hover={{ bg: 'none' }}
               _focus={{ bg: 'none' }}
+              color={textColor}
               borderRadius="8px"
               px="14px"
             >
-              <Text fontSize="sm">Profile Settings</Text>
-            </MenuItem>
-            <MenuItem
-              _hover={{ bg: 'none' }}
-              _focus={{ bg: 'none' }}
-              borderRadius="8px"
-              px="14px"
-            >
-              <Text fontSize="sm">Newsletter Settings</Text>
+              <Text fontSize="sm">Account</Text>
             </MenuItem>
             <MenuItem
               _hover={{ bg: 'none' }}

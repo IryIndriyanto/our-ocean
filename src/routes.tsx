@@ -1,7 +1,7 @@
 import { Icon } from '@chakra-ui/react';
 import {
   MdHistory,
-  MdPerson,
+  MdReport,
   MdHome,
   MdLock,
   MdBookmark,
@@ -31,16 +31,16 @@ const routes: IRoute[] = [
     secondary: true,
   },
   {
-    name: 'History',
+    name: 'Recents',
     layout: '/main',
     icon: <Icon as={MdHistory} width="20px" height="20px" color="inherit" />,
-    path: '/History',
+    path: '/recents',
   },
   {
-    name: 'Profile',
+    name: 'Report',
     layout: '/main',
-    path: '/profile',
-    icon: <Icon as={MdPerson} width="20px" height="20px" color="inherit" />,
+    path: '/report',
+    icon: <Icon as={MdReport} width="20px" height="20px" color="inherit" />,
   },
   {
     name: 'Sign In',

@@ -45,6 +45,7 @@ export function SearchBar (props: {
       />
       </InputLeftElement>
       <Input
+      id='search'
       variant='search'
       fontSize='sm'
       bg={background ? background : inputBg}

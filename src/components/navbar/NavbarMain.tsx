@@ -37,16 +37,9 @@ import {
   
     const { secondary, message, brandText } = props
   
-    let mainText = useColorModeValue('navy.700', 'white')
-    let secondaryText = useColorModeValue('gray.700', 'white')
     let navbarPosition = 'fixed' as const
     let navbarFilter = 'none'
-    let navbarBackdrop = 'blur(20px)'
     let navbarShadow = 'none'
-    let navbarBg = useColorModeValue(
-      'rgba(244, 247, 254, 0.2)',
-      'rgba(11,20,55,0.5)'
-    )
     let navbarBorder = 'transparent'
     let secondaryMargin = '0px'
     let paddingX = '15px'
@@ -63,7 +56,6 @@ import {
       <Box
         position={navbarPosition}
         boxShadow={navbarShadow}
-        bg={navbarBg}
         borderColor={navbarBorder}
         filter={navbarFilter}
         // backdropFilter={navbarBackdrop}
@@ -96,6 +88,7 @@ import {
         top={{ base: '12px', md: '16px', xl: '18px' }}
         w={{
           base: 'calc(100vw - 6%)',
+          sm: 'calc(100vw - 10%)',
           md: 'calc(100vw - 8%)',
           lg: 'calc(100vw - 6%)',
           xl: 'calc(100vw - 350px)',

@@ -7,8 +7,8 @@ export const globalStyles = {
       300: "#422AFB",
       400: "#7551FF",
       500: "#26d9d9",
-      600: "#3311DB",
-      700: "#02044A",
+      600: "#1aa6a6",
+      700: "#3311DB",
       800: "#190793",
       900: "#11047A",
     },
@@ -88,9 +88,6 @@ export const globalStyles = {
       },
       input: {
         color: "gray.700",
-      },
-      html: {
-        fontFamily: "DM Sans",
       },
     }),
   },
