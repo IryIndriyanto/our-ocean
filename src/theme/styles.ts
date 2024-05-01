@@ -108,7 +108,6 @@ export const components = {
         },
         dialog: {
           pointerEvents: "auto",
-          maxH:'80vh',
           // bg: `purple.100`,
         },
       },

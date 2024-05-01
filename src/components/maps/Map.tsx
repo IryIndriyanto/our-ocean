@@ -37,18 +37,16 @@ export default function Map() {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         {locations?.map((location: ILocation) => (
-              <Marker
-                key={location.id}
-                position={[location.latitude, location.longitude]}
-                icon={ICON}
-              >
-                <Popup>{location.name}</Popup>
-              </Marker>
-            ))}
+          <Marker
+            key={location.id}
+            position={[location.latitude, location.longitude]}
+            icon={ICON}
+          >
+            <Popup>{location.name}</Popup>
+          </Marker>
+        ))}
       </MapContainer>
-      <Box w="50vw">
-        <MapDrawer />
-      </Box>
+      <MapDrawer />
     </>
   );
 }
