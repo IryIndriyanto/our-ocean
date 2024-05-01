@@ -93,6 +93,7 @@ import {
           xl: 'calc(100vw - 350px)',
           '2xl': 'calc(100vw - 365px)'
         }}
+        zIndex='1500'
       >
         <Flex
           w='100%'
