@@ -16,7 +16,7 @@ export default function Default() {
 
   return (
     <>
-      <Box h={"150vh"}>ini box</Box>
+      <div></div>
     </>
   );
 }

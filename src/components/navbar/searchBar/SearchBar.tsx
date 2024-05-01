@@ -40,14 +40,15 @@ export function SearchBar(props: {
         />
       </InputLeftElement>
       <Input
-        variant="search"
-        fontSize="sm"
-        bg={background ? background : inputBg}
-        color={inputText}
-        fontWeight="500"
-        _placeholder={{ color: "gray.400", fontSize: "14px" }}
-        borderRadius={borderRadius ? borderRadius : "30px"}
-        placeholder={placeholder ? placeholder : "Search..."}
+      id='search'
+      variant='search'
+      fontSize='sm'
+      bg={background ? background : inputBg}
+      color={inputText}
+      fontWeight='500'
+      _placeholder={{ color: 'gray.400', fontSize: '14px' }}
+      borderRadius={borderRadius ? borderRadius : '30px'}
+      placeholder={placeholder ? placeholder : 'Search...'}
       />
     </InputGroup>
   );
