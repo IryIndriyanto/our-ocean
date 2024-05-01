@@ -16,8 +16,7 @@ export default function Default() {
 
   return (
     <>
-      <div>this is bookmarks page</div>
-      <Box h={'150vh'}>ini box</Box>
+      <Box h={"150vh"}>ini box</Box>
     </>
   );
 }
