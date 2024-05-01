@@ -1,9 +1,9 @@
 import { extendTheme, HTMLChakraProps, ThemingProps } from '@chakra-ui/react';
 import { breakpoints } from './foundations/breakpoints';
-import { globalStyles } from './styles';
+import { components, globalStyles } from './styles';
 
 export default extendTheme(
-	{ breakpoints }, // Breakpoints
+	{ breakpoints, components }, // Breakpoints
 	globalStyles
 );
 
