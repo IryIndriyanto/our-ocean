@@ -9,8 +9,9 @@ import {
 import { icon } from "leaflet";
 import useLocation from "@/hooks/useLocation";
 import MapDrawer from "./map-drawer/MapDrawer";
-import { Box } from "@chakra-ui/react";
+import { Box, IconButton, useDisclosure } from "@chakra-ui/react";
 import { ILocation } from "../../types/location";
+import { ChevronLeftIcon } from "@chakra-ui/icons";
 
 export default function Map() {
   const ICON = icon({
@@ -18,9 +19,9 @@ export default function Map() {
     iconSize: [30, 30],
   });
 
-  const { locations, isLoading, isError } = useLocation();
+  const { locations } = useLocation();
 
-  // if (isLoading) return "loading";
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <>
@@ -41,12 +42,21 @@ export default function Map() {
             key={location.id}
             position={[location.latitude, location.longitude]}
             icon={ICON}
+            eventHandlers={{ click: onOpen }}
           >
             <Popup>{location.name}</Popup>
           </Marker>
         ))}
       </MapContainer>
-      <MapDrawer />
+      <IconButton
+        icon={<ChevronLeftIcon />}
+        aria-label="Open drawer"
+        onClick={onOpen}
+        position="fixed"
+        top={40}
+        right={4}
+      />
+      <MapDrawer onClose={onClose} isOpen={isOpen} />
     </>
   );
 }
