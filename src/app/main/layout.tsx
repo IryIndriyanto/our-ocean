@@ -29,6 +29,7 @@ export default function AdminLayout(props: any) {
   // states and functions
   const [fixed] = useState(false);
   const [toggleSidebar, setToggleSidebar] = useState(false);
+
   // functions for changing the states from components
   const { onOpen } = useDisclosure();
 
@@ -80,10 +81,7 @@ export default function AdminLayout(props: any) {
 
           <Box
             mx="auto"
-            // p={{ base: '20px', md: '30px' }}
-            // pe="20px"
             minH="100vh"
-            // pt="50px"
           >
             {children}
           </Box>

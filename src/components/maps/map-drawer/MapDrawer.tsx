@@ -9,16 +9,15 @@ import {
   DrawerOverlay,
   extendTheme,
   IconButton,
+  useBreakpointValue,
   useDisclosure,
 } from "@chakra-ui/react";
-import { ChevronDownIcon, ChevronLeftIcon } from "@chakra-ui/icons";
+import { ChevronLeftIcon } from "@chakra-ui/icons";
 
 const MapDrawer = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  // Custom component variants
-  
-
-  // Extend the theme
+  const placement:"bottom" | "right" | undefined  = useBreakpointValue({ base: "bottom", md: "right" });
+  const size = useBreakpointValue({ base: "full", md: "sm" })
 
   return (
     <>
@@ -33,15 +32,16 @@ const MapDrawer = () => {
 
       <Drawer
         trapFocus={false}
-        size="sm"
+        size={size}
         onClose={onClose}
         isOpen={isOpen}
         closeOnOverlayClick={false}
-        variant='clickThrough'
+        variant="clickThrough"
+        placement={placement? placement:'right'}
       >
         {/* <DrawerOverlay /> */}
-        <DrawerContent>
-          <DrawerCloseButton />
+        <DrawerContent pt={{md:'110px'}}>
+          <DrawerCloseButton top={{md:'120px'}}/>
           <DrawerHeader>Drawer Title</DrawerHeader>
 
           <DrawerBody>{/* Content of the drawer */}</DrawerBody>
