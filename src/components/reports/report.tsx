@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 // Chakra imports
 import {
     Box,
@@ -18,8 +18,13 @@ import {
 } from '@chakra-ui/react';
 // Assets
 import Link from 'next/link';
+import useIssue from '@/hooks/useIssue'
+import { ILocation } from "../../types/location";
 
 export default function Report() {
+    const [issueCategory, setIssueCategory] = useState('Trash');
+    const [issueStatus, setIssueStatus] = useState('Reported')
+    const [description, setDescription] = useState('');
     // Chakra color mode
     const textColor = useColorModeValue('navy.700', 'white');
     const textColorSecondary = 'gray.400';
