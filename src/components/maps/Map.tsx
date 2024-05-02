@@ -9,8 +9,10 @@ import {
 import { icon } from "leaflet";
 import useLocation from "@/hooks/useLocation";
 import MapDrawer from "./map-drawer/MapDrawer";
-import { Box } from "@chakra-ui/react";
+import { IconButton, useDisclosure } from "@chakra-ui/react";
 import { ILocation } from "../../types/location";
+import { ChevronLeftIcon } from "@chakra-ui/icons";
+import { useState } from "react";
 
 export default function Map() {
   const ICON = icon({
@@ -18,9 +20,14 @@ export default function Map() {
     iconSize: [30, 30],
   });
 
-  const { locations, isLoading, isError } = useLocation();
-
-  // if (isLoading) return "loading";
+  const { locations } = useLocation();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [locationId, setLocationId] = useState(2);
+  const [locationName, setLocationName] = useState("Beach Name");
+  const getLocationId = (id: number, name: string) => {
+    setLocationId(id);
+    setLocationName(name);
+  };
 
   return (
     <>
@@ -41,12 +48,30 @@ export default function Map() {
             key={location.id}
             position={[location.latitude, location.longitude]}
             icon={ICON}
-          >
-            <Popup>{location.name}</Popup>
-          </Marker>
+            eventHandlers={{
+              click: () => {
+                onClose();
+                onOpen();
+                getLocationId(location.id, location.name);
+              },
+            }}
+          />
         ))}
       </MapContainer>
-      <MapDrawer />
+      <IconButton
+        icon={<ChevronLeftIcon />}
+        aria-label="Open drawer"
+        onClick={onOpen}
+        position="fixed"
+        top={40}
+        right={4}
+      />
+      <MapDrawer
+        onClose={onClose}
+        isOpen={isOpen}
+        locationId={locationId}
+        locationName={locationName}
+      />
     </>
   );
 }
