@@ -1,3 +1,5 @@
+import useIssue from "@/hooks/useIssue";
+import { Flex } from "@chakra-ui/react";
 import {
   Box,
   Drawer,
@@ -10,12 +12,13 @@ import {
   useBreakpointValue,
 } from "@chakra-ui/react";
 
-const MapDrawer = ({ onClose, isOpen }: any) => {
+const MapDrawer = ({ onClose, isOpen, locationId, locationName }: any) => {
   const placement: "bottom" | "right" | undefined = useBreakpointValue({
     base: "bottom",
     md: "right",
   });
   const size = useBreakpointValue({ base: "full", md: "sm" });
+  const { issue, isLoading, isError } = useIssue(locationId);
 
   return (
     <>
@@ -31,9 +34,18 @@ const MapDrawer = ({ onClose, isOpen }: any) => {
         {/* <DrawerOverlay /> */}
         <DrawerContent pt={{ base: "50px", md: "110px" }}>
           <DrawerCloseButton top={{ base: "50px", md: "120px" }} />
-          <DrawerHeader>Drawer Title</DrawerHeader>
+          <DrawerHeader>{locationName}</DrawerHeader>
 
-          <DrawerBody>{/* Content of the drawer */}</DrawerBody>
+          <DrawerBody>
+            <Flex direction={"column"}>
+              {issue?.message ? <Box>{issue.massage}</Box> : null}
+              <Box fontSize={"24px"} fontStyle={"strong"} pb={"5px"}>
+                {issue?.issue_title}
+              </Box>
+              <Box>{issue?.issue_description}</Box>
+              <Box>{issue?.issue_status}</Box>
+            </Flex>
+          </DrawerBody>
 
           <DrawerFooter>{/* Footer of the drawer */}</DrawerFooter>
         </DrawerContent>

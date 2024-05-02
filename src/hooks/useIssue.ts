@@ -2,14 +2,14 @@ import useSWR from "swr";
 import { fetcher } from "@/utils/fetcher";
 
 
-export default function useLocation() {
+export default function useIssue(id:number) {
   const { data, error, isLoading } = useSWR(
-    `https://oceanesia-be.onrender.com/locations/`,
+    `https://oceanesia-be.onrender.com/issues/${id}`,
     fetcher
   );
 
   return {
-    locations: data,
+    issue: data,
     isLoading,
     isError: error,
   };
