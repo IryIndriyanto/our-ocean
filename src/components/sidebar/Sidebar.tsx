@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef } from 'react'
 
 // chakra imports
 import {
@@ -12,37 +12,42 @@ import {
   useDisclosure,
   DrawerContent,
   DrawerCloseButton,
-} from '@chakra-ui/react';
-import Content from '@/components/sidebar/components/Content';
+} from '@chakra-ui/react'
+import Content from '@/components/sidebar/components/Content'
 
 // Assets
-import { IoMenuOutline } from 'react-icons/io5';
-import { IRoute } from '@/types/navigation';
-import { isWindowAvailable } from '@/utils/navigation';
+import { IoMenuOutline } from 'react-icons/io5'
+import { IRoute } from '@/types/navigation'
+import { isWindowAvailable } from '@/utils/navigation'
 
 interface SidebarResponsiveProps {
-  routes: IRoute[];
+  routes: IRoute[]
 }
 
 interface SidebarProps extends SidebarResponsiveProps {
-  [x: string]: any;
+  [x: string]: any
 }
 
 function Sidebar(props: SidebarProps) {
-  const { routes } = props;
+  const { routes } = props
 
-  let variantChange = '0.2s linear';
+  let variantChange = '0.2s linear'
   let shadow = useColorModeValue(
     '14px 17px 40px 4px rgba(112, 144, 176, 0.08)',
     'unset',
-  );
+  )
   // Chakra Color Mode
-  let sidebarBg = useColorModeValue('white', 'navy.800');
-  let sidebarMargins = '0px';
+  let sidebarBg = useColorModeValue('white', 'navy.800')
+  let sidebarMargins = '0px'
 
   // SIDEBAR
   return (
-    <Box zIndex='1' display={{ sm: 'none', xl: 'block' }} position="fixed" minH="100%">
+    <Box
+      zIndex="1"
+      display={{ sm: 'none', xl: 'block' }}
+      position="fixed"
+      minH="100%"
+    >
       <Box
         bg={sidebarBg}
         transition={variantChange}
@@ -56,19 +61,19 @@ function Sidebar(props: SidebarProps) {
         <Content routes={routes} />
       </Box>
     </Box>
-  );
+  )
 }
 
 // FUNCTIONS
 
 export function SidebarResponsive(props: SidebarResponsiveProps) {
-  let sidebarBackgroundColor = useColorModeValue('white', 'navy.800');
-  let menuColor = useColorModeValue('gray.400', 'white');
+  let sidebarBackgroundColor = useColorModeValue('white', 'navy.800')
+  let menuColor = useColorModeValue('gray.400', 'white')
   // // SIDEBAR
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const btnRef = useRef<HTMLDivElement>(null);
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const btnRef = useRef<HTMLDivElement>(null)
 
-  const { routes } = props;
+  const { routes } = props
   // let isWindows = navigator.platform.startsWith("Win");
   //  BRAND
 
@@ -109,7 +114,7 @@ export function SidebarResponsive(props: SidebarResponsiveProps) {
         </DrawerContent>
       </Drawer>
     </Flex>
-  );
+  )
 }
 
-export default Sidebar;
+export default Sidebar

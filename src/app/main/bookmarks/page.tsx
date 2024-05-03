@@ -1,4 +1,4 @@
-"use client";
+'use client'
 
 import {
   Box,
@@ -9,7 +9,7 @@ import {
   Select,
   SimpleGrid,
   useColorModeValue,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react'
 
 export default function Default() {
   // Chakra Color Mode
@@ -18,5 +18,5 @@ export default function Default() {
     <>
       <div></div>
     </>
-  );
+  )
 }
