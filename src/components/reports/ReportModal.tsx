@@ -15,7 +15,7 @@ import {
     Flex
 } from '@chakra-ui/react'
 import { HSeparator } from '../separator/Separator';
-import { RiPencilLine, RiPencilFill } from 'react-icons/ri'; 
+import { MdReport} from 'react-icons/md'; 
 import Report from "@/components/reports/report";
 
 export default function BackdropExample() {
@@ -38,13 +38,13 @@ export default function BackdropExample() {
         >
             <Button
                 fontSize='sm'
-                leftIcon={<Icon as={RiPencilLine} color={iconColor} boxSize={5} />}
+                
                 onClick={() => {
                     setOverlay(<OverlayOne />)
                     onOpen()
                 }}
             >
-                Suggest Editting
+                <MdReport size={24}/>
             </Button>
             <Modal 
                 isCentered 

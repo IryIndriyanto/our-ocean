@@ -94,7 +94,7 @@ export default function MainNavbar(props: {
         xl: "calc(100vw - 350px)",
         "2xl": "calc(100vw - 365px)",
       }}
-      zIndex={{ base: "1300", xl: "1500" }}
+      // zIndex={{ base: "1300", xl: "1500" }}
     >
       <Flex
         w="100%"
