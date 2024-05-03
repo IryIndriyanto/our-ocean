@@ -6,6 +6,9 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
+import { ILocation } from "@/types/location";
+import { useState } from "react";
+import useLocation from "@/hooks/useLocation";
 
 export function SearchBar(props: {
   variant?: string;

@@ -69,6 +69,7 @@ export default function HeaderLinks(props: {
       <Menu>
         <MenuButton p="0px">
           <Icon
+            mt='6px'
             as={MdNotificationsNone}
             color={navbarIcon}
             w="18px"

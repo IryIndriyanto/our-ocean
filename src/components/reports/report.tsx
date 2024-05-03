@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 // Chakra imports
 import {
     Box,
@@ -18,8 +18,13 @@ import {
 } from '@chakra-ui/react';
 // Assets
 import Link from 'next/link';
+import useIssue from '@/hooks/useIssue'
+import { ILocation } from "../../types/location";
 
 export default function Report() {
+    const [issueCategory, setIssueCategory] = useState('Trash');
+    const [issueStatus, setIssueStatus] = useState('Reported')
+    const [description, setDescription] = useState('');
     // Chakra color mode
     const textColor = useColorModeValue('navy.700', 'white');
     const textColorSecondary = 'gray.400';
@@ -27,33 +32,6 @@ export default function Report() {
     const [show, setShow] = React.useState(false);
     return (
 
-        <Flex
-        maxW={{ base: '100%', md: 'max-content' }}
-        w="100%"
-        mx={{ base: 'auto', lg: 'half-screen' }}
-        me="auto"
-        h="100%"
-        alignItems="start"
-        justifyContent="center"
-        mb={{ base: '30px', md: '60px' }}
-        px={{ base: '25px', md: '0px' }}
-        mt={{ base: '40px', md: '14vh' }}
-        flexDirection="column"
-        >
-            <Box me="auto">
-                <Heading color={textColor} fontSize="36px" mb="10px">
-                    Report a Beach Issue
-                </Heading>
-                <Text
-                mb="36px"
-                ms="4px"
-                color={textColorSecondary}
-                fontWeight="400"
-                fontSize="md"
-                >
-                    Help us improve the conditions at your local beach!
-                </Text>
-            </Box>
             <Flex
             zIndex="2"
             direction="column"
@@ -67,6 +45,29 @@ export default function Report() {
             >
                 
                 <FormControl>
+                <FormLabel
+                    htmlFor="search location"
+                    display="flex"
+                    ms="4px"
+                    fontSize="sm"
+                    fontWeight="500"
+                    color={textColor}
+                    mb="8px"
+                    >
+                        Beach Location<Text color={brandStars}>*</Text>
+                    </FormLabel>
+                    <Input
+                    isRequired={true}
+                    id="search"
+                    variant="auth"
+                    fontSize="sm"
+                    ms={{ base: '0px', md: '0px' }}
+                    type="search"
+                    placeholder="search Location"
+                    mb="24px"
+                    fontWeight="500"
+                    size="lg"
+                    />
                     <FormLabel
                     htmlFor="issue-type"
                     display="flex"
@@ -168,6 +169,5 @@ export default function Report() {
                         </Button>
                 </FormControl>
             </Flex>
-        </Flex>
     );
 }
