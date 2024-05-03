@@ -9,36 +9,36 @@ export const locations = [
     {
       "description": "Crowded urban beach in Jakarta with amusement parks; seafood restaurants; and evening entertainment.",
       "id": 3,
-      "latitude": -6.2751,
-      "longitude": 106.6277,
+      "latitude": -6.119399413995784,
+      "longitude": 106.85028384298579,
       "name": "Ancol Beach"
     },
     {
       "description": "Private island resort near Jakarta with white sandy beaches; coral reefs; and eco-friendly accommodations.",
       "id": 4,
-      "latitude": -6.274444,
-      "longitude": 106.831389,
+      "latitude": -5.5950289056288804,
+      "longitude": 106.55831739537702,
       "name": "Pulau Macan Beach"
     },
     {
       "description": "Popular beach in Banten with calm waters; sandy shores; and views of Krakatau volcano.",
       "id": 5,
-      "latitude": -6.354167,
-      "longitude": 106.795,
+      "latitude": -6.0877897624376205,
+      "longitude":  105.88370245415123,
       "name": "Anyer Beach"
     },
     {
       "description": "Remote beach in Banten known for its black sand; rocky cliffs; and epic sunsets.",
       "id": 6,
-      "latitude": -6.799444,
-      "longitude": 106.973056,
+      "latitude": -6.984301587209763, 
+      "longitude": 106.3068351580334,
       "name": "Sawarna Beach"
     },
     {
       "description": "Favorite weekend getaway near Jakarta with golden sands; clear waters; and beachfront cottages.",
       "id": 7,
-      "latitude": -6.607778,
-      "longitude": 106.795833,
+      "latitude": -6.295919858758553,
+      "longitude": 105.83964078884377,
       "name": "Carita Beach"
     },
     {

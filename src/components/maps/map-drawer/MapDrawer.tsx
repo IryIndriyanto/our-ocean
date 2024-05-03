@@ -18,7 +18,7 @@ const MapDrawer = ({ onClose, isOpen, locationId, locationName }: any) => {
     md: "right",
   });
   const size = useBreakpointValue({ base: "full", md: "sm" });
-  const { issue, isLoading, isError } = useIssue(locationId);
+  const { issue, isLoading, error } = useIssue(locationId);
 
   return (
     <>
@@ -38,7 +38,8 @@ const MapDrawer = ({ onClose, isOpen, locationId, locationName }: any) => {
 
           <DrawerBody>
             <Flex direction={"column"}>
-              {issue?.message ? <Box>{issue.massage}</Box> : null}
+              {error?.status === 404? <Box>No report yet</Box> : null}
+              {isLoading? <Box>Loading...</Box> : null}
               <Box fontSize={"24px"} fontStyle={"strong"} pb={"5px"}>
                 {issue?.issue_title}
               </Box>
