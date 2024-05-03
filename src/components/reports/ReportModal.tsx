@@ -4,7 +4,6 @@ import {
     ModalOverlay,
     ModalContent,
     ModalHeader,
-    ModalFooter,
     ModalBody,
     ModalCloseButton,
     useDisclosure, 
@@ -38,7 +37,6 @@ export default function BackdropExample() {
         >
             <Button
                 fontSize='sm'
-                
                 onClick={() => {
                     setOverlay(<OverlayOne />)
                     onOpen()
@@ -50,7 +48,6 @@ export default function BackdropExample() {
                 isCentered 
                 isOpen={isOpen} 
                 onClose={onClose} 
-                scrollBehavior='inside'
                 size='md'
             >
                 {overlay}
@@ -68,9 +65,6 @@ export default function BackdropExample() {
                         <Report/>
                     </ModalBody>
                     <HSeparator/>
-                    <ModalFooter>
-                        <Button onClick={onClose}>Close</Button>
-                    </ModalFooter>
                 </ModalContent>
             </Modal>
         </Flex>
