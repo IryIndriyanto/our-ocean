@@ -59,7 +59,7 @@ export default function SignIn() {
         mt={{ base: '40px', md: '6vh' }}
         flexDirection="column"
         >
-            {/* Tombol "Back to Map" */}
+            {/* "Back to Map" button */}
             <Link href="/main/map" style={{ width: 'fit-content', marginBottom: '60px' }}>
                 <Flex align="center">
                     <Icon as={FaChevronLeft} me="12px" h="13px" w="8px" color="secondaryGray.600" />

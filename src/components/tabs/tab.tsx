@@ -11,7 +11,7 @@ import { MdBookmarks, MdShare } from "react-icons/md";
 import ReviewCard from "../card/Reviewcard";
 
 const TabIssue = ({ locationId, locationName }: any) => {
-    const { issue, isLoading, isError } = useIssue(locationId);
+    const { issue, isLoading, error } = useIssue(locationId);
     return (
             <Tabs isFitted variant='unstyled'>
                 <TabList>

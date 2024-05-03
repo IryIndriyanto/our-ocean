@@ -1,16 +1,33 @@
 import useSWR from "swr";
-import { fetcher } from "@/utils/fetcher";
 
+const fetcher = async (url: string) => {
+  const resp = await fetch(url, {
+    method: "GET",
+  });
 
-export default function useIssue(id:number) {
+  if (!resp.ok) {
+    const error: any = new Error(
+      "An error occurred while fetching issue detail."
+    );
+    // Attach extra info to the error object.
+    error.info = await resp.json();
+    error.status = resp.status;
+    throw error;
+  }
+
+  return await resp.json();
+};
+
+export default function useIssue(id: number) {
   const { data, error, isLoading } = useSWR(
     `https://oceanesia-be.onrender.com/issues/${id}`,
-    fetcher
+    fetcher,
+    { shouldRetryOnError: false }
   );
 
   return {
     issue: data,
     isLoading,
-    isError: error,
+    error,
   };
 }
