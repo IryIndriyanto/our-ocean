@@ -1,6 +1,6 @@
-"use client";
+'use client'
 
-import Report from "@/components/reports/report";
+import Report from '@/components/reports/report'
 import {
   Box,
   Flex,
@@ -10,7 +10,7 @@ import {
   Select,
   SimpleGrid,
   useColorModeValue,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react'
 
 export default function Default() {
   // Chakra Color Mode
@@ -19,5 +19,5 @@ export default function Default() {
     <>
       <Report />
     </>
-  );
+  )
 }
