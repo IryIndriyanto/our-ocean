@@ -1,6 +1,8 @@
 'use client'
 
-import React, { useState } from 'react'
+import { useState } from 'react'
+import { v4 as uuidv4 } from 'uuid'
+
 // Chakra imports
 import {
   Box,
@@ -21,15 +23,51 @@ import Link from 'next/link'
 import useIssue from '@/hooks/useIssue'
 import { ILocation } from '../../types/location'
 
-export default function Report() {
-  const [issueCategory, setIssueCategory] = useState('Trash')
-  const [issueStatus, setIssueStatus] = useState('Reported')
+export default function ReportForm({ latitude, longitude }: any) {
+  const [issueCategory, setIssueCategory] = useState('OTHER')
+  const [issueStatus, setIssueStatus] = useState('OPEN')
   const [description, setDescription] = useState('')
   // Chakra color mode
   const textColor = useColorModeValue('navy.700', 'white')
   const textColorSecondary = 'gray.400'
   const brandStars = useColorModeValue('brand.500', 'brand.400')
-  const [show, setShow] = React.useState(false)
+  const [show, setShow] = useState(false)
+
+  const handleFileUpload = async (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const file = event.target.files?.[0]
+    if (!file) {
+      // Handle the case when no file is selected
+      return
+    }
+    const filename = `${uuidv4()}-${file.name}`
+    const formData = new FormData()
+    formData.append('file', file)
+
+    try {
+      const response = await fetch(
+        `https://atbipbhagnbuqiuntcbb.supabase.co/storage/v1/object/oceanesia-photo/${filename}`,
+        {
+          method: 'POST',
+          body: formData,
+          headers: {
+            Authorization:
+              'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF0YmlwYmhhZ25idXFpdW50Y2JiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTMzNTk3NDQsImV4cCI6MjAyODkzNTc0NH0.YTB_X5qbWg_6N95qzGIMJ02hupe4-761PgqbmE_f8p0',
+          },
+        },
+      )
+      const data = await response.json()
+      const imageId = encodeURIComponent(data.Key.replace('oceanesia-photo/',''))
+      const fileUrl = `https://atbipbhagnbuqiuntcbb.supabase.co/storage/v1/object/public/oceanesia-photo/${imageId}`
+      console.log(fileUrl)
+      // Do something with the file URL, such as displaying it or saving it to a database
+    } catch (error) {
+      // Handle any errors that occur during the upload process
+      console.log(error)
+    }
+  }
+
   return (
     <Flex
       zIndex="2"
@@ -44,28 +82,54 @@ export default function Report() {
     >
       <FormControl>
         <FormLabel
-          htmlFor="search location"
+          htmlFor="latitude"
           display="flex"
           ms="4px"
           fontSize="sm"
           fontWeight="500"
           color={textColor}
-          mb="8px"
+          mb="4px"
         >
-          Beach Location<Text color={brandStars}>*</Text>
+          Location Latitude <Text color={brandStars}>*</Text>
         </FormLabel>
         <Input
           isRequired={true}
-          id="search"
+          id="latitude"
           variant="auth"
           fontSize="sm"
           ms={{ base: '0px', md: '0px' }}
           type="search"
-          placeholder="search Location"
-          mb="24px"
+          value={latitude}
+          mb="12px"
           fontWeight="500"
           size="lg"
+          disabled={true}
         />
+        <FormLabel
+          htmlFor="longitude"
+          display="flex"
+          ms="4px"
+          fontSize="sm"
+          fontWeight="500"
+          color={textColor}
+          mb="4px"
+        >
+          Location Longitude <Text color={brandStars}>*</Text>
+        </FormLabel>
+        <Input
+          isRequired={true}
+          id="longitude"
+          variant="auth"
+          fontSize="sm"
+          ms={{ base: '0px', md: '0px' }}
+          type="search"
+          value={longitude}
+          mb="12px"
+          fontWeight="500"
+          size="lg"
+          disabled={true}
+        />
+
         <FormLabel
           htmlFor="issue-type"
           display="flex"
@@ -73,7 +137,7 @@ export default function Report() {
           fontSize="sm"
           fontWeight="500"
           color={textColor}
-          mb="8px"
+          mb="4px"
         >
           Issue Type<Text color={brandStars}>*</Text>
         </FormLabel>
@@ -83,14 +147,15 @@ export default function Report() {
           fontSize="sm"
           ms={{ base: '0px', md: '0px' }}
           defaultValue="Trash"
-          mb="24px"
+          mb="12px"
           fontWeight="500"
           size="lg"
         >
-          <option value="trash">Trash</option>
-          <option value="pollution">Pollution</option>
-          <option value="erosion">Erosion</option>
-          <option value="unsafe">Unsafe</option>
+          <option value="TRASH">Trash</option>
+          <option value="POLLUTION">Pollution</option>
+          <option value="EROSION">Erosion</option>
+          <option value="UNSAFE">Unsafe</option>
+          <option value="OTHER">Other</option>
         </Select>
         <FormLabel
           htmlFor="description"
@@ -99,7 +164,7 @@ export default function Report() {
           fontSize="sm"
           fontWeight="500"
           color={textColor}
-          mb="8px"
+          mb="4px"
         >
           Description<Text color={brandStars}>*</Text>
         </FormLabel>
@@ -112,7 +177,7 @@ export default function Report() {
           ms={{ base: '0px', md: '0px' }}
           type="text"
           placeholder="describe the issue"
-          mb="24px"
+          mb="12px"
           fontWeight="500"
           size="lg"
         />
@@ -131,9 +196,11 @@ export default function Report() {
           id="photo"
           fontSize="sm"
           ms={{ base: '0px', md: '0px' }}
-          mb="24px"
+          mb="12px"
           size="lg"
           type="file"
+          accept="image/*"
+          onChange={handleFileUpload}
           fontWeight="500"
           variant="auth"
           sx={{
@@ -161,7 +228,7 @@ export default function Report() {
           fontWeight="500"
           w="100%"
           h="50"
-          mb="24px"
+          mb="12px"
         >
           Submit Report
         </Button>

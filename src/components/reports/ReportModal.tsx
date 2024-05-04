@@ -15,9 +15,9 @@ import {
 } from '@chakra-ui/react'
 import { HSeparator } from '../separator/Separator'
 import { MdReport } from 'react-icons/md'
-import Report from '@/components/reports/report'
+import ReportForm from '@/components/reports/ReportForm'
 
-export default function BackdropExample() {
+export default function ReportFormModal({ latitude, longitude }: any) {
   const OverlayOne = () => (
     <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px)" />
   )
@@ -50,7 +50,7 @@ export default function BackdropExample() {
             }}
             paddingY={6}
           >
-            <Report />
+            <ReportForm latitude={latitude} longitude={longitude} />
           </ModalBody>
           <HSeparator />
         </ModalContent>

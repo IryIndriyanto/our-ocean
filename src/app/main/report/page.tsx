@@ -1,6 +1,6 @@
 'use client'
 
-import Report from '@/components/reports/report'
+import Report from '@/components/reports/ReportForm'
 import {
   Box,
   Flex,
