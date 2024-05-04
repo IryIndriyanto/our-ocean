@@ -1,6 +1,7 @@
 "use client";
 
-import Report from "@/components/reports/report";
+import Map from "@/components/maps/Map";
+import Account from "@/components/account/account";
 import {
   Box,
   Flex,
@@ -17,7 +18,7 @@ export default function Default() {
 
   return (
     <>
-      <Report />
+      <Account/>
     </>
   );
 }

@@ -1,6 +1,6 @@
 // chakra imports
 import { Icon, Flex, Text, useColorModeValue } from "@chakra-ui/react";
-import { MdUpgrade } from "react-icons/md"; 
+import { BiMessageAltDots} from "react-icons/bi"; 
 
 export function ItemContent(props:{info:string}) {
   const textColor = useColorModeValue("navy.700", "white");
@@ -10,13 +10,12 @@ export function ItemContent(props:{info:string}) {
         justify='center'
         align='center'
         borderRadius='16px'
-        minH={{ base: "60px", md: "70px" }}
-        h={{ base: "60px", md: "70px" }}
-        minW={{ base: "60px", md: "70px" }}
-        w={{ base: "60px", md: "70px" }}
-        me='14px'
-        bg='linear-gradient(135deg, #868CFF 0%, #4318FF 100%)'>
-        <Icon as={MdUpgrade} color='white' w={8} h={14} />
+        minH={{ base: "30px", md: "40px" }}
+        h={{ base: "30px", md: "40px" }}
+        minW={{ base: "30px", md: "40px" }}
+        w={{ base: "30px", md: "40px" }}
+        me='14px'>
+        <Icon as={BiMessageAltDots} color='navy.500' w={8} h={14} />
       </Flex>
       <Flex flexDirection='column'>
         <Text

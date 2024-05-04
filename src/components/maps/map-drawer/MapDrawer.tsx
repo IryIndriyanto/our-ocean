@@ -38,7 +38,7 @@ const MapDrawer = ({ onClose, isOpen, locationId, locationName }: any) => {
           <DrawerCloseButton />
           <DrawerHeader >{locationName}</DrawerHeader>
           <DrawerBody>
-            <Flex direction={"column"}>
+            <Flex direction={"column"} >
               {issue?.message ? <Box>{issue.massage}</Box> : null}
               <Box fontSize={"24px"} fontStyle={"strong"} pb={"5px"}>
                 {issue?.issue_title}

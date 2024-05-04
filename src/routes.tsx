@@ -37,12 +37,6 @@ const routes: IRoute[] = [
     path: '/recents',
   },
   {
-    name: 'Report',
-    layout: '/main',
-    path: '/report',
-    icon: <Icon as={MdReport} width="20px" height="20px" color="inherit" />,
-  },
-  {
     name: 'Sign In',
     layout: '/auth',
     path: '/sign-in',

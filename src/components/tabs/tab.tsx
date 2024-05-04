@@ -2,13 +2,17 @@ import useIssue from "@/hooks/useIssue";
 import { Flex } from "@chakra-ui/react";
 import {
     Box,
-    Tooltip,Button, Text
+    Tooltip,
+    Button, 
+    Text,
+    Divider
 } from "@chakra-ui/react";
 import { Tabs, TabList, TabPanels, Tab, TabPanel, TabIndicator } from '@chakra-ui/react'
 import { HSeparator } from '@/components/separator/Separator';
 import BackdropExample from "@/components/reports/ReportModal";
 import { MdBookmarks, MdShare } from "react-icons/md";
 import ReviewCard from "../card/Reviewcard";
+import Summary from "../card/Summary";
 
 const TabIssue = ({ locationId, locationName }: any) => {
     const { issue, isLoading, isError } = useIssue(locationId);
@@ -23,7 +27,7 @@ const TabIssue = ({ locationId, locationName }: any) => {
                 <HSeparator/>
                 <TabPanels>
                     <TabPanel>
-                        <Flex justifyContent='space-between' mt='10px'>
+                        <Flex justifyContent='space-between'>
                             <Tooltip label='Save' hasArrow placement='top'>
                                 <Flex direction='column' alignItems='center'>
                                     <Button>
@@ -47,6 +51,24 @@ const TabIssue = ({ locationId, locationName }: any) => {
                                 </Flex>
                             </Tooltip>
                         </Flex>
+                        <HSeparator 
+                        mx={-4} 
+                        my={6}  
+                        w={{base:"auto",
+                        sm: "auto",
+                        md:"auto",
+                        lg: "auto",
+                        xl: "30vw",
+                        }} />
+                        <Box mt={2} ml={-4} alignItems="flex-start">
+                            <Summary 
+                            name={'iry'}
+                            image={''}
+                            avatar={''}
+                            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+                            date={new Date()} 
+                            />
+                        </Box>
                     </TabPanel>
                     <TabPanel>
                     <ReviewCard
@@ -58,8 +80,16 @@ const TabIssue = ({ locationId, locationName }: any) => {
                     name="Adela Parkson"
                     job="Product Designer"
                     />
+                    <HSeparator 
+                        mx={-4} 
+                        my={6}  
+                        w={{base:"auto",
+                        sm: "auto",
+                        md:"auto",
+                        lg: "auto",
+                        xl: "30vw",
+                        }} />
                     </TabPanel>
-                    <HSeparator/>
                     <TabPanel>
                         <Box>{issue?.issue_description}ppp</Box>
                     </TabPanel>
