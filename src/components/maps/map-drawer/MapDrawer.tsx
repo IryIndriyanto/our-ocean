@@ -17,8 +17,6 @@ const MapDrawer = ({
   isOpen,
   locationId,
   locationName,
-  latitude,
-  longitude,
 }: any) => {
   const placement: 'bottom' | 'right' | undefined = useBreakpointValue({
     base: 'bottom',
@@ -42,7 +40,7 @@ const MapDrawer = ({
         <DrawerContent>
           <DrawerCloseButton />
           <DrawerHeader>{locationName}</DrawerHeader>
-          <DrawerBody>
+          <DrawerBody py={{ base: '20px', md: '5px' }}>
             <Flex direction={'column'}>
               {error?.status === 404 ? <Box>No report yet</Box> : null}
               {isLoading ? <Box>Loading...</Box> : null}
@@ -50,7 +48,7 @@ const MapDrawer = ({
                 {issue?.issue_title}
               </Box>
               <Box>{issue?.issue_status}</Box>
-              <TabIssue latitude={latitude} longitude={longitude} />
+              <TabIssue locationId={locationId} locationName={locationName} />
             </Flex>
           </DrawerBody>
           <DrawerFooter>{/* Footer of the drawer */}</DrawerFooter>

@@ -21,7 +21,7 @@ const fetcher = async (url: string) => {
 
 export default function useIssue(id: number) {
   const { data, error, isLoading } = useSWR(
-    `${SERVICE_URL}/issues/${id}`,
+    `${SERVICE_URL}/issues/location/${id}`,
     fetcher,
     { shouldRetryOnError: false },
   )

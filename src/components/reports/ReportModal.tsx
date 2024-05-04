@@ -17,12 +17,11 @@ import { HSeparator } from '../separator/Separator'
 import { MdReport } from 'react-icons/md'
 import ReportForm from '@/components/reports/ReportForm'
 
-export default function ReportFormModal({ latitude, longitude }: any) {
+export default function ReportFormModal({ locationId, locationName }: any) {
   const OverlayOne = () => (
     <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px)" />
   )
 
-  const iconColor = useColorModeValue('brand.500', 'white')
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [overlay, setOverlay] = React.useState(<OverlayOne />)
 
@@ -50,7 +49,7 @@ export default function ReportFormModal({ latitude, longitude }: any) {
             }}
             paddingY={6}
           >
-            <ReportForm latitude={latitude} longitude={longitude} />
+            <ReportForm locationId={locationId} onClose={onClose} locationName={locationName} />
           </ModalBody>
           <HSeparator />
         </ModalContent>

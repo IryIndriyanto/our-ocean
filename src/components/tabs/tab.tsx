@@ -14,7 +14,7 @@ import { MdBookmarks, MdShare } from 'react-icons/md'
 import ReviewCard from '../card/Reviewcard'
 import ReportFormModal from '@/components/reports/ReportModal'
 
-const TabIssue = ({ locationId, locationName, latitude, longitude }: any) => {
+const TabIssue = ({ locationId, locationName }: any) => {
   const { issue, isLoading, error } = useIssue(locationId)
   return (
     <Tabs isFitted variant="unstyled">
@@ -43,7 +43,7 @@ const TabIssue = ({ locationId, locationName, latitude, longitude }: any) => {
             </Tooltip>
             <Tooltip>
               <Flex direction="column" alignItems="center">
-                <ReportFormModal latitude={latitude} longitude={longitude} />
+                <ReportFormModal locationId={locationId} locationName={locationName} />
                 <Text>Report</Text>
               </Flex>
             </Tooltip>

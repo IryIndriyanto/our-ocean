@@ -26,11 +26,11 @@ export default function Map() {
   const [locationName, setLocationName] = useState('Beach Name')
   const [latitude, setLatitude] = useState(-6.1754)
   const [longitude, setLongitude] = useState(106.827)
-  const getLocation = (id: number, name: string, lat: number, lang: number) => {
-    setLocationId(id)
-    setLocationName(name)
-    setLatitude(lat)
-    setLongitude(lang)
+  const getLocation = (location:ILocation) => {
+    setLocationId(location.id)
+    setLocationName(location.name)
+    setLatitude(location.latitude)
+    setLongitude(location.longitude)
   }
 
   return (
@@ -57,10 +57,7 @@ export default function Map() {
                 onClose()
                 onOpen()
                 getLocation(
-                  location.id,
-                  location.name,
-                  location.latitude,
-                  location.longitude,
+                  location
                 )
               },
             }}
