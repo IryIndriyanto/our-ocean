@@ -1,0 +1,1 @@
+export const SERVICE_URL = 'https://oceanesia-be.onrender.com'

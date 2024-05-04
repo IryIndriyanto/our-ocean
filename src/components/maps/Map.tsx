@@ -12,7 +12,7 @@ import MapDrawer from './map-drawer/MapDrawer'
 import { IconButton, useDisclosure } from '@chakra-ui/react'
 import { ILocation } from '../../types/location'
 import { ChevronLeftIcon } from '@chakra-ui/icons'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 
 export default function Map() {
   const ICON = icon({
@@ -24,9 +24,13 @@ export default function Map() {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [locationId, setLocationId] = useState(2)
   const [locationName, setLocationName] = useState('Beach Name')
-  const getLocationId = (id: number, name: string) => {
-    setLocationId(id)
-    setLocationName(name)
+  const [latitude, setLatitude] = useState(-6.1754)
+  const [longitude, setLongitude] = useState(106.827)
+  const getLocation = (location:ILocation) => {
+    setLocationId(location.id)
+    setLocationName(location.name)
+    setLatitude(location.latitude)
+    setLongitude(location.longitude)
   }
 
   return (
@@ -52,7 +56,9 @@ export default function Map() {
               click: () => {
                 onClose()
                 onOpen()
-                getLocationId(location.id, location.name)
+                getLocation(
+                  location
+                )
               },
             }}
           />
@@ -71,6 +77,8 @@ export default function Map() {
         isOpen={isOpen}
         locationId={locationId}
         locationName={locationName}
+        latitude={latitude}
+        longitude={longitude}
       />
     </>
   )

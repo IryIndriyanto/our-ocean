@@ -15,14 +15,13 @@ import {
 } from '@chakra-ui/react'
 import { HSeparator } from '../separator/Separator'
 import { MdReport } from 'react-icons/md'
-import Report from '@/components/reports/report'
+import ReportForm from '@/components/reports/ReportForm'
 
-export default function BackdropExample() {
+export default function ReportFormModal({ locationId, locationName }: any) {
   const OverlayOne = () => (
     <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px)" />
   )
 
-  const iconColor = useColorModeValue('brand.500', 'white')
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [overlay, setOverlay] = React.useState(<OverlayOne />)
 
@@ -50,7 +49,7 @@ export default function BackdropExample() {
             }}
             paddingY={6}
           >
-            <Report />
+            <ReportForm locationId={locationId} onClose={onClose} locationName={locationName} />
           </ModalBody>
           <HSeparator />
         </ModalContent>

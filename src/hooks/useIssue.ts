@@ -1,3 +1,4 @@
+import { SERVICE_URL } from '@/utils/constant'
 import useSWR from 'swr'
 
 const fetcher = async (url: string) => {
@@ -20,7 +21,7 @@ const fetcher = async (url: string) => {
 
 export default function useIssue(id: number) {
   const { data, error, isLoading } = useSWR(
-    `https://oceanesia-be.onrender.com/issues/${id}`,
+    `${SERVICE_URL}/issues/location/${id}`,
     fetcher,
     { shouldRetryOnError: false },
   )

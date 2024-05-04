@@ -10,9 +10,9 @@ import {
   TabIndicator,
 } from '@chakra-ui/react'
 import { HSeparator } from '@/components/separator/Separator'
-import BackdropExample from '@/components/reports/ReportModal'
 import { MdBookmarks, MdShare } from 'react-icons/md'
 import ReviewCard from '../card/Reviewcard'
+import ReportFormModal from '@/components/reports/ReportModal'
 
 const TabIssue = ({ locationId, locationName }: any) => {
   const { issue, isLoading, error } = useIssue(locationId)
@@ -43,7 +43,7 @@ const TabIssue = ({ locationId, locationName }: any) => {
             </Tooltip>
             <Tooltip>
               <Flex direction="column" alignItems="center">
-                <BackdropExample />
+                <ReportFormModal locationId={locationId} locationName={locationName} />
                 <Text>Report</Text>
               </Flex>
             </Tooltip>

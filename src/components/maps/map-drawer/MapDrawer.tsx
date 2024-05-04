@@ -8,12 +8,16 @@ import {
   DrawerContent,
   DrawerFooter,
   DrawerHeader,
-  DrawerOverlay,
   useBreakpointValue,
 } from '@chakra-ui/react'
 import TabIssue from '@/components/tabs/tab'
 
-const MapDrawer = ({ onClose, isOpen, locationId, locationName }: any) => {
+const MapDrawer = ({
+  onClose,
+  isOpen,
+  locationId,
+  locationName,
+}: any) => {
   const placement: 'bottom' | 'right' | undefined = useBreakpointValue({
     base: 'bottom',
     md: 'right',
@@ -36,7 +40,7 @@ const MapDrawer = ({ onClose, isOpen, locationId, locationName }: any) => {
         <DrawerContent>
           <DrawerCloseButton />
           <DrawerHeader>{locationName}</DrawerHeader>
-          <DrawerBody>
+          <DrawerBody py={{ base: '20px', md: '5px' }}>
             <Flex direction={'column'}>
               {error?.status === 404 ? <Box>No report yet</Box> : null}
               {isLoading ? <Box>Loading...</Box> : null}
@@ -44,7 +48,7 @@ const MapDrawer = ({ onClose, isOpen, locationId, locationName }: any) => {
                 {issue?.issue_title}
               </Box>
               <Box>{issue?.issue_status}</Box>
-              <TabIssue />
+              <TabIssue locationId={locationId} locationName={locationName} />
             </Flex>
           </DrawerBody>
           <DrawerFooter>{/* Footer of the drawer */}</DrawerFooter>
