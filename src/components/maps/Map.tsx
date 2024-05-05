@@ -5,6 +5,7 @@ import {
   Popup,
   useMapEvents,
   ZoomControl,
+  Tooltip,
 } from 'react-leaflet'
 import { icon } from 'leaflet'
 import useLocation from '@/hooks/useLocation'
@@ -19,6 +20,10 @@ export default function Map() {
     iconUrl: '/location.png',
     iconSize: [30, 30],
   })
+  const ICON_CLICKED = icon({
+    iconUrl: '/marker.png',
+    iconSize: [35, 35],
+  })
 
   const { locations } = useLocation()
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -26,11 +31,28 @@ export default function Map() {
   const [locationName, setLocationName] = useState('Beach Name')
   const [latitude, setLatitude] = useState(-6.1754)
   const [longitude, setLongitude] = useState(106.827)
-  const getLocation = (location:ILocation) => {
+  const [clickedMarkers, setClickedMarker] = useState<{
+    [key: string]: boolean
+  }>({})
+
+  const getLocation = (location: ILocation) => {
     setLocationId(location.id)
     setLocationName(location.name)
     setLatitude(location.latitude)
     setLongitude(location.longitude)
+  }
+
+  const handleMarkerClick = (location: ILocation) => {
+    onClose()
+    setClickedMarker({})
+    setClickedMarker((prevClickedMarkers) => ({
+      ...prevClickedMarkers,
+      [location.id]: true,
+    }))
+    getLocation(location)
+    setTimeout(() => {
+      onOpen()
+    }, 300)
   }
 
   return (
@@ -51,17 +73,15 @@ export default function Map() {
           <Marker
             key={location.id}
             position={[location.latitude, location.longitude]}
-            icon={ICON}
+            icon={clickedMarkers[location.id] ? ICON_CLICKED : ICON}
             eventHandlers={{
               click: () => {
-                onClose()
-                onOpen()
-                getLocation(
-                  location
-                )
+                handleMarkerClick(location)
               },
             }}
-          />
+          >
+            <Tooltip >{location.name}</Tooltip>
+          </Marker>
         ))}
       </MapContainer>
       <IconButton
@@ -79,6 +99,7 @@ export default function Map() {
         locationName={locationName}
         latitude={latitude}
         longitude={longitude}
+        setClickedMarker={setClickedMarker}
       />
     </>
   )

@@ -1,4 +1,3 @@
-import useIssue from '@/hooks/useIssue'
 import { Flex } from '@chakra-ui/react'
 import {
   Box,
@@ -18,8 +17,7 @@ import ReviewCard from '../card/ReviewCard'
 import ReportFormModal from '@/components/reports/ReportModal'
 import Summary from '../card/Summary'
 
-const TabIssue = ({ locationId, locationName }: any) => {
-  const { issue, isLoading, error } = useIssue(locationId)
+const TabIssue = ({ issue, locationId, locationName }: any) => {
   return (
     <Tabs isFitted variant="unstyled">
       <TabList>
@@ -37,48 +35,44 @@ const TabIssue = ({ locationId, locationName }: any) => {
       <TabPanels>
         <TabPanel>
           <Flex justifyContent="space-between">
-              <Flex direction="column" alignItems="center">
-                <Button>
-                  <MdBookmarks size={24} />
-                </Button>
-                <Text>Save</Text>
-              </Flex>
-              <Flex direction="column" alignItems="center">
-                <ReportFormModal
-                  locationId={locationId}
-                  locationName={locationName}
-                />
-                <Text>Report</Text>
-              </Flex>
-              <Flex direction="column" alignItems="center">
-                <Button>
-                  <MdShare size={24} />
-                </Button>
-                <Text>Share</Text>
-              </Flex>
+            <Flex direction="column" alignItems="center">
+              <Button>
+                <MdBookmarks size={24} />
+              </Button>
+              <Text>Save</Text>
+            </Flex>
+            <Flex direction="column" alignItems="center">
+              <ReportFormModal
+                locationId={locationId}
+                locationName={locationName}
+              />
+              <Text>Report</Text>
+            </Flex>
+            <Flex direction="column" alignItems="center">
+              <Button>
+                <MdShare size={24} />
+              </Button>
+              <Text>Share</Text>
+            </Flex>
           </Flex>
-          <HSeparator w={'auto'} mx={-4} my={4}/>
+          <HSeparator w={'auto'} mx={-4} my={4} />
           <Box mt={2} ml={-4} alignItems="flex-start">
             <Summary
               name={'iry'}
               image={''}
               avatar={''}
-              text="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+              text={issue?.issue_title}
               date={new Date()}
             />
           </Box>
         </TabPanel>
         <TabPanel>
           <ReviewCard
-            text="With Chakra UI, I wanted to sync the speed of development with the speed
-                    of design. I wanted the developer to be just as excited as the designer to
-                    create a screen."
-            image={
-              'https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80'
-            }
+            text={issue?.issue_description}
+            image={issue?.issue_image}
             avatar={''}
-            name="Adela Parkson"
-            job="Product Designer"
+            name="Anonymous"
+            job="Volunteer"
           />
         </TabPanel>
         <TabPanel>

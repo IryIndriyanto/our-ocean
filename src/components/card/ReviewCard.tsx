@@ -7,6 +7,7 @@ import {
   IconButton,
   Image,
   Button,
+  AspectRatio,
 } from '@chakra-ui/react'
 import { BiLike, BiChat, BiShare } from 'react-icons/bi'
 import { BsThreeDotsVertical } from 'react-icons/bs'
@@ -54,7 +55,9 @@ export default function ReviewCard(props: {
 
       <Text mt="10px">{text}</Text>
 
-      <Image objectFit="cover" src={image} alt="Chakra UI" />
+      <AspectRatio ratio={1}>
+        <Image objectFit="cover" src={image} alt="Chakra UI" />
+      </AspectRatio>
 
       <Flex justify="space-between" flexWrap="wrap" mt="10px">
         <Button flex="1" leftIcon={<BiLike />} borderRadius={'8px'}>
@@ -67,7 +70,7 @@ export default function ReviewCard(props: {
           Share
         </Button>
       </Flex>
-      <HSeparator mx={-4} my={6} w='auto'/>
+      <HSeparator mx={-4} my={6} w="auto" />
     </CustomCard>
   )
 }
