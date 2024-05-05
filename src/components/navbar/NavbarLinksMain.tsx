@@ -183,15 +183,17 @@ export default function HeaderLinks(props: {
             </Text>
           </Flex>
           <Flex flexDirection="column" p="10px">
-            <MenuItem
-              _hover={{ bg: 'none' }}
-              _focus={{ bg: 'none' }}
-              color={textColor}
-              borderRadius="8px"
-              px="14px"
-            >
-              <Text fontSize="sm">Account</Text>
-            </MenuItem>
+            <Link href="/main/account">
+              <MenuItem
+                _hover={{ bg: 'none' }}
+                _focus={{ bg: 'none' }}
+                color={textColor}
+                borderRadius="8px"
+                px="14px"
+              >
+                <Text fontSize="sm">Account</Text>
+              </MenuItem>
+            </Link>
             <MenuItem
               _hover={{ bg: 'none' }}
               _focus={{ bg: 'none' }}

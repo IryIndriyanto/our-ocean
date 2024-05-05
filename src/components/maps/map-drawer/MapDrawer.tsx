@@ -12,12 +12,7 @@ import {
 } from '@chakra-ui/react'
 import TabIssue from '@/components/tabs/tab'
 
-const MapDrawer = ({
-  onClose,
-  isOpen,
-  locationId,
-  locationName,
-}: any) => {
+const MapDrawer = ({ onClose, isOpen, locationId, locationName }: any) => {
   const placement: 'bottom' | 'right' | undefined = useBreakpointValue({
     base: 'bottom',
     md: 'right',

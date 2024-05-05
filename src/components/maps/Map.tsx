@@ -70,7 +70,7 @@ export default function Map() {
         onClick={onOpen}
         position="fixed"
         top={40}
-        right={4}
+        right={10}
       />
       <MapDrawer
         onClose={onClose}

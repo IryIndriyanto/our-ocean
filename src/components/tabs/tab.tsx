@@ -1,7 +1,10 @@
 import useIssue from '@/hooks/useIssue'
 import { Flex } from '@chakra-ui/react'
-import { Box, Tooltip, Button, Text } from '@chakra-ui/react'
 import {
+  Box,
+  Tooltip,
+  Button,
+  Text,
   Tabs,
   TabList,
   TabPanels,
@@ -10,9 +13,11 @@ import {
   TabIndicator,
 } from '@chakra-ui/react'
 import { HSeparator } from '@/components/separator/Separator'
+import BackdropExample from '@/components/reports/ReportModal'
 import { MdBookmarks, MdShare } from 'react-icons/md'
 import ReviewCard from '../card/ReviewCard'
 import ReportFormModal from '@/components/reports/ReportModal'
+import Summary from '../card/Summary'
 
 const TabIssue = ({ locationId, locationName }: any) => {
   const { issue, isLoading, error } = useIssue(locationId)
@@ -43,7 +48,10 @@ const TabIssue = ({ locationId, locationName }: any) => {
             </Tooltip>
             <Tooltip>
               <Flex direction="column" alignItems="center">
-                <ReportFormModal locationId={locationId} locationName={locationName} />
+                <ReportFormModal
+                  locationId={locationId}
+                  locationName={locationName}
+                />
                 <Text>Report</Text>
               </Flex>
             </Tooltip>
@@ -56,6 +64,20 @@ const TabIssue = ({ locationId, locationName }: any) => {
               </Flex>
             </Tooltip>
           </Flex>
+          <HSeparator
+            mx={-4}
+            my={6}
+            w={{ base: 'auto', sm: 'auto', md: 'auto', lg: 'auto', xl: '30vw' }}
+          />
+          <Box mt={2} ml={-4} alignItems="flex-start">
+            <Summary
+              name={'iry'}
+              image={''}
+              avatar={''}
+              text="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+              date={new Date()}
+            />
+          </Box>
         </TabPanel>
         <TabPanel>
           <ReviewCard
@@ -69,8 +91,12 @@ const TabIssue = ({ locationId, locationName }: any) => {
             name="Adela Parkson"
             job="Product Designer"
           />
+          <HSeparator
+            mx={-4}
+            my={6}
+            w={{ base: 'auto', sm: 'auto', md: 'auto', lg: 'auto', xl: '30vw' }}
+          />
         </TabPanel>
-        <HSeparator />
         <TabPanel>
           <Box>{issue?.issue_description}ppp</Box>
         </TabPanel>
