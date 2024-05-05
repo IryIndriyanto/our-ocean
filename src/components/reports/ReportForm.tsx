@@ -17,20 +17,24 @@ import {
   Text,
   useColorModeValue,
   Center,
+  useToast,
+  Spinner,
 } from '@chakra-ui/react'
 // Assets
 import { ANON_KEY, SERVICE_URL } from '@/utils/constant'
 
 export default function ReportForm({ locationId, locationName, onClose }: any) {
+  //Form State
   const [issueTitle, setIssueTitle] = useState('')
   const [issueCategory, setIssueCategory] = useState('OTHER')
   const [issueDescription, setIssueDescription] = useState('')
-
   const [file, setFile] = useState<File | undefined>()
-  // const [photoURL, setPhotoURL] = useState('')
-  // Chakra color mode
+  const [isFormLoading, setIsFormLoading] = useState(false)
+
+  // Chakra variable
   const textColor = useColorModeValue('navy.700', 'white')
   const brandStars = useColorModeValue('brand.500', 'brand.400')
+  const toast = useToast()
 
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
@@ -57,8 +61,7 @@ export default function ReportForm({ locationId, locationName, onClose }: any) {
           method: 'POST',
           body: formData,
           headers: {
-            Authorization:
-              `Bearer ${ANON_KEY}`,
+            Authorization: `Bearer ${ANON_KEY}`,
           },
         },
       )
@@ -69,12 +72,14 @@ export default function ReportForm({ locationId, locationName, onClose }: any) {
       return `https://atbipbhagnbuqiuntcbb.supabase.co/storage/v1/object/public/oceanesia-photo/${imageId}`
     } catch (error) {
       console.log(error)
+      setIsFormLoading(false)
       throw new Error(`An error occurred while uploading photo`)
     }
   }
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+    setIsFormLoading(true)
 
     const photoURL = await handleFileUpload(file)
 
@@ -97,12 +102,29 @@ export default function ReportForm({ locationId, locationName, onClose }: any) {
 
       if (response.ok) {
         console.log('Form submitted successfully')
+        toast({
+          title: 'Form submitted',
+          description: 'Your form has been submitted successfully.',
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+        })
+        setIsFormLoading(false)
         onClose()
       } else {
         console.error('Form submission failed')
+        toast({
+          title: 'Form submission failed',
+          description: 'There was an error submitting the form.',
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+        })
+        setIsFormLoading(false)
       }
     } catch (error) {
       console.error('Error submitting form:', error)
+      setIsFormLoading(false)
     }
   }
 
@@ -165,6 +187,7 @@ export default function ReportForm({ locationId, locationName, onClose }: any) {
             fontWeight="500"
             size="lg"
             onChange={(e) => setIssueTitle(e.target.value)}
+            autoComplete="off"
           />
 
           <FormLabel
@@ -270,7 +293,7 @@ export default function ReportForm({ locationId, locationName, onClose }: any) {
             h="50"
             mb="12px"
           >
-            Submit Report
+            {isFormLoading ? <Spinner /> : 'Submit Report'}
           </Button>
         </FormControl>
       </form>

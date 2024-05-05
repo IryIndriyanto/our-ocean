@@ -13,7 +13,6 @@ import {
   TabIndicator,
 } from '@chakra-ui/react'
 import { HSeparator } from '@/components/separator/Separator'
-import BackdropExample from '@/components/reports/ReportModal'
 import { MdBookmarks, MdShare } from 'react-icons/md'
 import ReviewCard from '../card/ReviewCard'
 import ReportFormModal from '@/components/reports/ReportModal'
@@ -37,16 +36,13 @@ const TabIssue = ({ locationId, locationName }: any) => {
       <HSeparator />
       <TabPanels>
         <TabPanel>
-          <Flex justifyContent="space-between" mt="10px">
-            <Tooltip label="Save" hasArrow placement="top">
+          <Flex justifyContent="space-between">
               <Flex direction="column" alignItems="center">
                 <Button>
                   <MdBookmarks size={24} />
                 </Button>
                 <Text>Save</Text>
               </Flex>
-            </Tooltip>
-            <Tooltip>
               <Flex direction="column" alignItems="center">
                 <ReportFormModal
                   locationId={locationId}
@@ -54,21 +50,14 @@ const TabIssue = ({ locationId, locationName }: any) => {
                 />
                 <Text>Report</Text>
               </Flex>
-            </Tooltip>
-            <Tooltip label="Share" hasArrow placement="top">
               <Flex direction="column" alignItems="center">
                 <Button>
                   <MdShare size={24} />
                 </Button>
                 <Text>Share</Text>
               </Flex>
-            </Tooltip>
           </Flex>
-          <HSeparator
-            mx={-4}
-            my={6}
-            w={{ base: 'auto', sm: 'auto', md: 'auto', lg: 'auto', xl: '30vw' }}
-          />
+          <HSeparator w={'auto'} mx={-4} my={4}/>
           <Box mt={2} ml={-4} alignItems="flex-start">
             <Summary
               name={'iry'}
@@ -91,14 +80,9 @@ const TabIssue = ({ locationId, locationName }: any) => {
             name="Adela Parkson"
             job="Product Designer"
           />
-          <HSeparator
-            mx={-4}
-            my={6}
-            w={{ base: 'auto', sm: 'auto', md: 'auto', lg: 'auto', xl: '30vw' }}
-          />
         </TabPanel>
         <TabPanel>
-          <Box>{issue?.issue_description}ppp</Box>
+          <Box minH={'65vh'}>{issue?.issue_description}ppp</Box>
         </TabPanel>
       </TabPanels>
     </Tabs>
