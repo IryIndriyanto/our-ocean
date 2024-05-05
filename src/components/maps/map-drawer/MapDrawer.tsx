@@ -38,21 +38,23 @@ const MapDrawer = ({
         placement={placement ? placement : 'right'}
       >
         <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton onClick={() => setClickedMarker({})} />
+        <DrawerContent pt={{ base: '25px', md: '5px' }}>
+          <DrawerCloseButton right={10} top={{ base: '30px', md: '5px' }} onClick={() => setClickedMarker({})} />
           <DrawerHeader>{locationName}</DrawerHeader>
           <DrawerBody>
-            <Flex py={{ base: '20px', md: '5px' }} direction={'column'}>
+            <Flex direction={'column'}>
               {error?.status === 404 ? <Box>No report yet</Box> : null}
               {isLoading ? <Box>Loading...</Box> : null}
               <Box fontSize={'24px'} fontStyle={'strong'} pb={'5px'}>
                 {issue?.issue_title}
               </Box>
               <Box>{issue?.issue_status}</Box>
-              <TabIssue locationId={locationId} locationName={locationName} />
+              <TabIssue issue={issue} locationId={locationId} locationName={locationName} />
             </Flex>
           </DrawerBody>
-          <DrawerFooter>{/* Footer of the drawer */}</DrawerFooter>
+          <DrawerFooter>
+            <Box>&copy; Oceanesia 2024</Box>
+          </DrawerFooter>
         </DrawerContent>
       </Drawer>
     </>
