@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react'
 import { HSeparator } from '@/components/separator/Separator'
 import { MdBookmarks, MdShare } from 'react-icons/md'
-import ReviewCard from '../card/Reviewcard'
+import ReviewCard from '../card/ReviewCard'
 import ReportFormModal from '@/components/reports/ReportModal'
 
 const TabIssue = ({ locationId, locationName }: any) => {
