@@ -1,5 +1,5 @@
 import useIssue from '@/hooks/useIssue'
-import { Flex } from '@chakra-ui/react'
+import { DrawerOverlay, Flex } from '@chakra-ui/react'
 import {
   Box,
   Drawer,
@@ -31,12 +31,12 @@ const MapDrawer = ({ onClose, isOpen, locationId, locationName }: any) => {
         variant="clickThrough"
         placement={placement ? placement : 'right'}
       >
-        {/* <DrawerOverlay /> */}
+        <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
           <DrawerHeader>{locationName}</DrawerHeader>
-          <DrawerBody py={{ base: '20px', md: '5px' }}>
-            <Flex direction={'column'}>
+          <DrawerBody>
+            <Flex py={{ base: '20px', md: '5px' }} direction={'column'}>
               {error?.status === 404 ? <Box>No report yet</Box> : null}
               {isLoading ? <Box>Loading...</Box> : null}
               <Box fontSize={'24px'} fontStyle={'strong'} pb={'5px'}>

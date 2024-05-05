@@ -11,6 +11,7 @@ import {
 import { BiLike, BiChat, BiShare } from 'react-icons/bi'
 import { BsThreeDotsVertical } from 'react-icons/bs'
 import CustomCard from '@/components/card/Card'
+import { HSeparator } from '@/components/separator/Separator'
 
 export default function ReviewCard(props: {
   image: string
@@ -66,6 +67,7 @@ export default function ReviewCard(props: {
           Share
         </Button>
       </Flex>
+      <HSeparator mx={-4} my={6} w='auto'/>
     </CustomCard>
   )
 }
