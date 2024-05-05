@@ -1,7 +1,7 @@
-import dynamic from 'next/dynamic';
+import dynamic from 'next/dynamic'
 
 const MapComponent = dynamic(() => import('./Map'), {
   ssr: false,
-});
+})
 
-export { MapComponent };
+export { MapComponent }

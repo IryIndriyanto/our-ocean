@@ -1,44 +1,41 @@
 // chakra imports
-import { Box, Flex, HStack, Text, useColorModeValue } from '@chakra-ui/react';
-import Link from 'next/link';
-import { IRoute } from '@/types/navigation';
-import { usePathname } from 'next/navigation';
-import { useCallback } from 'react';
+import { Box, Flex, HStack, Text, useColorModeValue } from '@chakra-ui/react'
+import Link from 'next/link'
+import { IRoute } from '@/types/navigation'
+import { usePathname } from 'next/navigation'
+import { useCallback } from 'react'
 
 interface SidebarLinksProps {
-  routes: IRoute[];
+  routes: IRoute[]
 }
 
 export function SidebarLinks(props: SidebarLinksProps) {
-  const { routes } = props;
+  const { routes } = props
 
   //   Chakra color mode
-  const pathname = usePathname();
+  const pathname = usePathname()
 
-  let activeColor = useColorModeValue('gray.700', 'white');
+  let activeColor = useColorModeValue('gray.700', 'white')
   let inactiveColor = useColorModeValue(
     'secondaryGray.600',
     'secondaryGray.600',
-  );
-  let activeIcon = useColorModeValue('brand.500', 'white');
-  let textColor = useColorModeValue('secondaryGray.500', 'white');
-  let brandColor = useColorModeValue('brand.500', 'brand.400');
+  )
+  let activeIcon = useColorModeValue('brand.500', 'white')
+  let textColor = useColorModeValue('secondaryGray.500', 'white')
+  let brandColor = useColorModeValue('brand.500', 'brand.400')
 
   // verifies if routeName is the one active (in browser input)
   const activeRoute = useCallback(
     (routeName: string) => {
-      return pathname?.includes(routeName);
+      return pathname?.includes(routeName)
     },
     [pathname],
-  );
+  )
 
   // this function creates the links from the secondary accordions (for example auth -> sign-in -> default)
   const createLinks = (routes: IRoute[]) => {
     return routes.map((route, index: number) => {
-      if (
-        route.layout === '/main' ||
-        route.layout === '/auth'
-      ) {
+      if (route.layout === '/main' || route.layout === '/auth') {
         return (
           <Link key={index} href={route.layout + route.path}>
             {route.icon ? (
@@ -116,12 +113,12 @@ export function SidebarLinks(props: SidebarLinksProps) {
               </Box>
             )}
           </Link>
-        );
+        )
       }
-    });
-  };
+    })
+  }
   //  BRAND
-  return <>{createLinks(routes)}</>;
+  return <>{createLinks(routes)}</>
 }
 
-export default SidebarLinks;
+export default SidebarLinks
