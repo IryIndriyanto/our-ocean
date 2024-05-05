@@ -37,15 +37,12 @@ const TabIssue = ({ locationId, locationName }: any) => {
       <TabPanels>
         <TabPanel>
           <Flex justifyContent="space-between">
-            <Tooltip label="Save Location" hasArrow placement="top">
               <Flex direction="column" alignItems="center">
                 <Button>
                   <MdBookmarks size={24} />
                 </Button>
                 <Text>Save</Text>
               </Flex>
-            </Tooltip>
-            <Tooltip label="Report an Issue" hasArrow placement="top">
               <Flex direction="column" alignItems="center">
                 <ReportFormModal
                   locationId={locationId}
@@ -53,15 +50,12 @@ const TabIssue = ({ locationId, locationName }: any) => {
                 />
                 <Text>Report</Text>
               </Flex>
-            </Tooltip>
-            <Tooltip label="Share Location" hasArrow placement="top">
               <Flex direction="column" alignItems="center">
                 <Button>
                   <MdShare size={24} />
                 </Button>
                 <Text>Share</Text>
               </Flex>
-            </Tooltip>
           </Flex>
           <HSeparator w={'auto'} mx={-4} my={4}/>
           <Box mt={2} ml={-4} alignItems="flex-start">
