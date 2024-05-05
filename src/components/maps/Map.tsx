@@ -5,6 +5,7 @@ import {
   Popup,
   useMapEvents,
   ZoomControl,
+  Tooltip,
 } from 'react-leaflet'
 import { icon } from 'leaflet'
 import useLocation from '@/hooks/useLocation'
@@ -43,13 +44,15 @@ export default function Map() {
 
   const handleMarkerClick = (location: ILocation) => {
     onClose()
-    onOpen()
     setClickedMarker({})
     setClickedMarker((prevClickedMarkers) => ({
       ...prevClickedMarkers,
       [location.id]: true,
     }))
     getLocation(location)
+    setTimeout(() => {
+      onOpen()
+    }, 300)
   }
 
   return (
@@ -72,9 +75,13 @@ export default function Map() {
             position={[location.latitude, location.longitude]}
             icon={clickedMarkers[location.id] ? ICON_CLICKED : ICON}
             eventHandlers={{
-              click: () => {handleMarkerClick(location)},
+              click: () => {
+                handleMarkerClick(location)
+              },
             }}
-          />
+          >
+            <Tooltip >{location.name}</Tooltip>
+          </Marker>
         ))}
       </MapContainer>
       <IconButton
