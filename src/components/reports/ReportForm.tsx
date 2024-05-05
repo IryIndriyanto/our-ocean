@@ -19,7 +19,7 @@ import {
   Center,
 } from '@chakra-ui/react'
 // Assets
-import { SERVICE_URL } from '@/utils/constant'
+import { ANON_KEY, SERVICE_URL } from '@/utils/constant'
 
 export default function ReportForm({ locationId, locationName, onClose }: any) {
   const [issueTitle, setIssueTitle] = useState('')
@@ -27,7 +27,7 @@ export default function ReportForm({ locationId, locationName, onClose }: any) {
   const [issueDescription, setIssueDescription] = useState('')
 
   const [file, setFile] = useState<File | undefined>()
-  const [photoLink, setPhotoURL] = useState('')
+  // const [photoURL, setPhotoURL] = useState('')
   // Chakra color mode
   const textColor = useColorModeValue('navy.700', 'white')
   const brandStars = useColorModeValue('brand.500', 'brand.400')
@@ -58,7 +58,7 @@ export default function ReportForm({ locationId, locationName, onClose }: any) {
           body: formData,
           headers: {
             Authorization:
-              'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF0YmlwYmhhZ25idXFpdW50Y2JiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTMzNTk3NDQsImV4cCI6MjAyODkzNTc0NH0.YTB_X5qbWg_6N95qzGIMJ02hupe4-761PgqbmE_f8p0',
+              `Bearer ${ANON_KEY}`,
           },
         },
       )
@@ -66,20 +66,17 @@ export default function ReportForm({ locationId, locationName, onClose }: any) {
       const imageId = encodeURIComponent(
         data.Key.replace('oceanesia-photo/', ''),
       )
-      const photoUrl = `https://atbipbhagnbuqiuntcbb.supabase.co/storage/v1/object/public/oceanesia-photo/${imageId}`
-      setPhotoURL(photoUrl)
-      // Do something with the file URL, such as displaying it or saving it to a database
+      return `https://atbipbhagnbuqiuntcbb.supabase.co/storage/v1/object/public/oceanesia-photo/${imageId}`
     } catch (error) {
-      // Handle any errors that occur during the upload process
       console.log(error)
-      return
+      throw new Error(`An error occurred while uploading photo`)
     }
   }
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
-    await handleFileUpload(file)
+    const photoURL = await handleFileUpload(file)
 
     try {
       const response = await fetch(`${SERVICE_URL}/issues/`, {
@@ -91,7 +88,7 @@ export default function ReportForm({ locationId, locationName, onClose }: any) {
           user_id: 1,
           location_id: locationId,
           issue_title: issueTitle,
-          issue_image: photoLink,
+          issue_image: photoURL,
           issue_category: issueCategory,
           issue_status: 'OPEN',
           issue_description: issueDescription,
