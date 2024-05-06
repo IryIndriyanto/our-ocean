@@ -17,6 +17,7 @@ const MapDrawer = ({
   isOpen,
   locationId,
   locationName,
+  locationDescription,
   setClickedMarker,
 }: any) => {
   const placement: 'bottom' | 'right' | undefined = useBreakpointValue({
@@ -49,7 +50,7 @@ const MapDrawer = ({
                 {issue?.issue_title}
               </Box>
               <Box>{issue?.issue_status}</Box>
-              <TabIssue issue={issue} locationId={locationId} locationName={locationName} />
+              <TabIssue issue={issue} locationId={locationId} locationName={locationName} locationDescription={locationDescription}/>
             </Flex>
           </DrawerBody>
           <DrawerFooter>

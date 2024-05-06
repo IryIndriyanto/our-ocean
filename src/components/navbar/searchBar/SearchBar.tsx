@@ -1,4 +1,5 @@
 import {
+  Box,
   IconButton,
   Input,
   InputGroup,
@@ -7,13 +8,16 @@ import {
   PopoverCloseButton,
   PopoverContent,
   PopoverTrigger,
+  StackDivider,
   useColorModeValue,
+  VStack,
 } from '@chakra-ui/react'
 import { SearchIcon } from '@chakra-ui/icons'
 import { ILocation } from '@/types/location'
 import { ChangeEvent, useRef, useState } from 'react'
-import useLocation from '@/hooks/useLocation'
 import { InputRightElement } from '@chakra-ui/react'
+import useSearchLocationName from '@/hooks/useSearchLocationName'
+import { useSearchedLocationStore } from '@/hooks/useSearchedLocation'
 
 export function SearchBar(props: {
   variant?: string
@@ -29,16 +33,23 @@ export function SearchBar(props: {
   const searchIconColor = useColorModeValue('gray.700', 'white')
   const inputBg = useColorModeValue('secondaryGray.300', 'navy.900')
   const inputText = useColorModeValue('gray.700', 'gray.100')
+
   const [searchTerm, setSearchTerm] = useState('')
   const inputRef = useRef<HTMLInputElement>(null)
   const popoverRef = useRef<HTMLButtonElement>(null)
 
-  const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(event.target.value)
-  }
+  //zustand state
+  const { setSearchedLocationLtLg } = useSearchedLocationStore()
+
+  // popover state
   const handleInputBlur = () => {
     popoverRef.current?.click()
   }
+  // Handle search
+  const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(event.target.value)
+  }
+  const { locations, isError } = useSearchLocationName(searchTerm)
 
   return (
     <InputGroup w={{ base: '100%', md: '300px' }} {...rest}>
@@ -83,15 +94,42 @@ export function SearchBar(props: {
           top={3}
           left={{ base: '10vw', md: '68px', xl: '48px' }}
           zIndex={2}
-          h={200}
+          h={'auto'}
+          maxH={350}
           w={{
             base: '80vw',
             md: '450px',
             xl: '430px',
           }}
+          overflow={'hidden'}
         >
           <PopoverCloseButton ref={popoverRef} display={'none'} />
-          {searchTerm || 'No search entered'}
+          <VStack
+            divider={<StackDivider borderColor="gray.200" />}
+            spacing={1.5}
+            align="stretch"
+          >
+            <Box>{searchTerm || 'No search entered'}</Box>
+            {searchTerm &&
+              locations &&
+              locations.map((location: ILocation) => (
+                <Box
+                  px={'4px'}
+                  cursor={'pointer'}
+                  _hover={{ fontWeight: 'semibold' }}
+                  key={location.id}
+                  onClick={() =>
+                    setSearchedLocationLtLg([
+                      location.latitude,
+                      location.longitude,
+                    ])
+                  }
+                >
+                  {location.name}
+                </Box>
+              ))}
+            {isError && 'no result'}
+          </VStack>
         </PopoverContent>
       </Popover>
     </InputGroup>

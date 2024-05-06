@@ -17,11 +17,11 @@ import { useState, useRef } from 'react'
 
 export default function Map() {
   const ICON = icon({
-    iconUrl: '/location.png',
+    iconUrl: '/assets/location.png',
     iconSize: [30, 30],
   })
   const ICON_CLICKED = icon({
-    iconUrl: '/marker.png',
+    iconUrl: '/assets/marker.png',
     iconSize: [35, 35],
   })
 
@@ -31,6 +31,7 @@ export default function Map() {
   const [locationName, setLocationName] = useState('Beach Name')
   const [latitude, setLatitude] = useState(-6.1754)
   const [longitude, setLongitude] = useState(106.827)
+  const [locationDescription, setLocationDescription] = useState('No Description Yet.')
   const [clickedMarkers, setClickedMarker] = useState<{
     [key: string]: boolean
   }>({})
@@ -40,6 +41,7 @@ export default function Map() {
     setLocationName(location.name)
     setLatitude(location.latitude)
     setLongitude(location.longitude)
+    setLocationDescription(location.description)
   }
 
   const handleMarkerClick = (location: ILocation) => {
@@ -99,6 +101,7 @@ export default function Map() {
         locationName={locationName}
         latitude={latitude}
         longitude={longitude}
+        locationDescription={locationDescription}
         setClickedMarker={setClickedMarker}
       />
     </>

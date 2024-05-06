@@ -15,14 +15,12 @@ import { HSeparator } from '@/components/separator/Separator'
 import { MdBookmarks, MdShare } from 'react-icons/md'
 import ReviewCard from '../card/ReviewCard'
 import ReportFormModal from '@/components/reports/ReportModal'
-import Summary from '../card/Summary'
 
-const TabIssue = ({ issue, locationId, locationName }: any) => {
+const TabIssue = ({ issue, locationId, locationName,locationDescription }: any) => {
   return (
     <Tabs isFitted variant="unstyled">
       <TabList>
-        <Tab>Overview</Tab>
-        <Tab>Reviews</Tab>
+        <Tab>Issues</Tab>
         <Tab>About</Tab>
       </TabList>
       <TabIndicator
@@ -56,17 +54,7 @@ const TabIssue = ({ issue, locationId, locationName }: any) => {
             </Flex>
           </Flex>
           <HSeparator w={'auto'} mx={-4} my={4} />
-          <Box mt={2} ml={-4} alignItems="flex-start">
-            <Summary
-              name={'iry'}
-              image={''}
-              avatar={''}
-              text={issue?.issue_title}
-              date={new Date()}
-            />
-          </Box>
-        </TabPanel>
-        <TabPanel>
+
           <ReviewCard
             text={issue?.issue_description}
             image={issue?.issue_image}
@@ -76,7 +64,7 @@ const TabIssue = ({ issue, locationId, locationName }: any) => {
           />
         </TabPanel>
         <TabPanel>
-          <Box minH={'65vh'}>{issue?.issue_description}ppp</Box>
+          <Box minH={'65vh'}>{locationDescription}</Box>
         </TabPanel>
       </TabPanels>
     </Tabs>
