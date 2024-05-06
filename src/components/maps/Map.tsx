@@ -17,11 +17,11 @@ import { useState, useRef } from 'react'
 
 export default function Map() {
   const ICON = icon({
-    iconUrl: '/location.png',
+    iconUrl: '/assets/location.png',
     iconSize: [30, 30],
   })
   const ICON_CLICKED = icon({
-    iconUrl: '/marker.png',
+    iconUrl: '/assets/marker.png',
     iconSize: [35, 35],
   })
 

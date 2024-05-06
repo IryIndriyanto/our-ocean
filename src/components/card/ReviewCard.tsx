@@ -56,7 +56,7 @@ export default function ReviewCard(props: {
       <Text mt="10px">{text}</Text>
 
       <AspectRatio ratio={1}>
-        <Image objectFit="cover" src={image} alt="Chakra UI" />
+        <Image objectFit="cover" src={image || '/assets/placeholder-image.webp'} alt="Image of Beach" />
       </AspectRatio>
 
       <Flex justify="space-between" flexWrap="wrap" mt="10px">
