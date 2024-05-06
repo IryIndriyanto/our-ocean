@@ -17,6 +17,7 @@ import { ILocation } from '@/types/location'
 import { ChangeEvent, useRef, useState } from 'react'
 import { InputRightElement } from '@chakra-ui/react'
 import useSearchLocationName from '@/hooks/useSearchLocationName'
+import { useSearchedLocationStore } from '@/hooks/useSearchedLocation'
 
 export function SearchBar(props: {
   variant?: string
@@ -37,6 +38,10 @@ export function SearchBar(props: {
   const inputRef = useRef<HTMLInputElement>(null)
   const popoverRef = useRef<HTMLButtonElement>(null)
 
+  //zustand state
+  const { setSearchedLocationLtLg } = useSearchedLocationStore()
+
+  // popover state
   const handleInputBlur = () => {
     popoverRef.current?.click()
   }
@@ -44,7 +49,6 @@ export function SearchBar(props: {
   const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value)
   }
-
   const { locations, isError } = useSearchLocationName(searchTerm)
 
   return (
@@ -114,7 +118,12 @@ export function SearchBar(props: {
                   cursor={'pointer'}
                   _hover={{ fontWeight: 'semibold' }}
                   key={location.id}
-                  onClick={() => console.log(location.name)}
+                  onClick={() =>
+                    setSearchedLocationLtLg([
+                      location.latitude,
+                      location.longitude,
+                    ])
+                  }
                 >
                   {location.name}
                 </Box>
