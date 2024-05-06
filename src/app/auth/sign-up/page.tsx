@@ -23,6 +23,7 @@ import Link from 'next/link'
 import { FcGoogle } from 'react-icons/fc'
 import { MdOutlineRemoveRedEye } from 'react-icons/md'
 import { RiEyeCloseLine } from 'react-icons/ri'
+import { FaChevronLeft } from 'react-icons/fa'
 
 export default function SignIn() {
   // Chakra color mode
@@ -57,6 +58,23 @@ export default function SignIn() {
       mt={{ base: '40px', md: '14vh' }}
       flexDirection="column"
     >
+      <Link
+        href="/main/map"
+        style={{ width: 'fit-content', marginBottom: '20px' }}
+      >
+        <Flex align="center">
+          <Icon
+            as={FaChevronLeft}
+            me="12px"
+            h="13px"
+            w="8px"
+            color="secondaryGray.600"
+          />
+          <Text ms="0px" fontSize="sm" color="secondaryGray.600">
+            Back to Map
+          </Text>
+        </Flex>
+      </Link>
       <Box me="auto">
         <Heading color={textColor} fontSize="36px" mb="10px">
           Sign Up
