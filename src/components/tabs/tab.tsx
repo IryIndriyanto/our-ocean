@@ -64,7 +64,7 @@ const TabIssue = ({ issue, locationId, locationName,locationDescription }: any) 
           />
         </TabPanel>
         <TabPanel>
-          <Box minH={'65vh'}>{locationDescription}ppp</Box>
+          <Box minH={'65vh'}>{locationDescription}</Box>
         </TabPanel>
       </TabPanels>
     </Tabs>
