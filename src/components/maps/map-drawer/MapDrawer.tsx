@@ -38,7 +38,7 @@ const MapDrawer = ({
         placement={placement ? placement : 'right'}
       >
         <DrawerOverlay />
-        <DrawerContent maxH={{ base: '95vh', md: 'none' }} pt={6}>
+        <DrawerContent maxH={{ base: '95dvh', md: 'none' }} pt={6}>
           <DrawerCloseButton right={10} top={{ base: '20px', md: '5px' }} onClick={() => setClickedMarker({})} />
           <DrawerHeader>{locationName}</DrawerHeader>
           <DrawerBody>
