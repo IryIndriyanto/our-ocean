@@ -1,2 +1,3 @@
 export const SERVICE_URL = 'https://oceanesia-be.onrender.com'
 export const ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF0YmlwYmhhZ25idXFpdW50Y2JiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTMzNTk3NDQsImV4cCI6MjAyODkzNTc0NH0.YTB_X5qbWg_6N95qzGIMJ02hupe4-761PgqbmE_f8p0'
+export const ACCESS_TOKEN = 'oceanesia-access-token'
