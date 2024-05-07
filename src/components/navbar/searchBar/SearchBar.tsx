@@ -39,7 +39,7 @@ export function SearchBar(props: {
   const popoverRef = useRef<HTMLButtonElement>(null)
 
   //zustand state
-  const { setSearchedLocationLtLg } = useSearchedLocationStore()
+  const { setSearchedLocation } = useSearchedLocationStore()
 
   // popover state
   const handleInputBlur = () => {
@@ -118,12 +118,7 @@ export function SearchBar(props: {
                   cursor={'pointer'}
                   _hover={{ fontWeight: 'semibold' }}
                   key={location.id}
-                  onClick={() =>
-                    setSearchedLocationLtLg([
-                      location.latitude,
-                      location.longitude,
-                    ])
-                  }
+                  onClick={() => setSearchedLocation(location)}
                 >
                   {location.name}
                 </Box>

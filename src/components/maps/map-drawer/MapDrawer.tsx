@@ -41,16 +41,10 @@ const MapDrawer = ({
         <DrawerOverlay />
         <DrawerContent maxH={{ base: '95svh', md: 'none' }} pt={6}>
           <DrawerCloseButton right={10} top={{ base: '20px', md: '5px' }} onClick={() => setClickedMarker({})} />
-          <DrawerHeader>{locationName}</DrawerHeader>
+          <DrawerHeader px={'38px'} fontSize={'x-large'}>{locationName}</DrawerHeader>
           <DrawerBody>
             <Flex direction={'column'}>
-              {error?.status === 404 ? <Box>No report yet</Box> : null}
-              {isLoading ? <Box>Loading...</Box> : null}
-              <Box fontSize={'24px'} fontStyle={'strong'} pb={'5px'}>
-                {issue?.issue_title}
-              </Box>
-              <Box>{issue?.issue_status}</Box>
-              <TabIssue issue={issue} locationId={locationId} locationName={locationName} locationDescription={locationDescription}/>
+              <TabIssue locationId={locationId} locationName={locationName} locationDescription={locationDescription}/>
             </Flex>
           </DrawerBody>
           <DrawerFooter>

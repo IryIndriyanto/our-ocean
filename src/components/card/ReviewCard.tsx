@@ -8,6 +8,12 @@ import {
   Image,
   Button,
   AspectRatio,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverBody,
+  VStack,
+  Center,
 } from '@chakra-ui/react'
 import { BiLike, BiChat, BiShare } from 'react-icons/bi'
 import { BsThreeDotsVertical } from 'react-icons/bs'
@@ -20,9 +26,10 @@ export default function ReviewCard(props: {
   name: string
   job: string
   text: string
+  title: string
   [x: string]: any
 }) {
-  const { image, avatar, name, job, text, ...rest } = props
+  const { image, avatar, name, job, text, title, ...rest } = props
   const textColorPrimary = useColorModeValue('secondaryGray.900', 'white')
   const textColorSecondary = 'gray.400'
   const borderColor = useColorModeValue('white', '#111C44')
@@ -45,18 +52,39 @@ export default function ReviewCard(props: {
             </Text>
           </Flex>
         </Flex>
-        <IconButton
-          variant="ghost"
-          colorScheme="gray"
-          aria-label="See menu"
-          icon={<BsThreeDotsVertical />}
-        />
+        <Popover>
+          <PopoverTrigger>
+            <IconButton
+              variant="ghost"
+              colorScheme="gray"
+              aria-label="See menu"
+              icon={<BsThreeDotsVertical />}
+            />
+          </PopoverTrigger>
+          <PopoverContent w={20}>
+            <PopoverBody>
+              <VStack>
+                <Center cursor={'pointer'}>Edit</Center>
+                <Center cursor={'pointer'} color={'red'}>
+                  Delete
+                </Center>
+              </VStack>
+            </PopoverBody>
+          </PopoverContent>
+        </Popover>
       </Flex>
 
+      <Text fontWeight={'bold'} fontSize={'lg'} mt="15px">
+        {title}
+      </Text>
       <Text mt="10px">{text}</Text>
 
-      <AspectRatio ratio={1}>
-        <Image objectFit="cover" src={image || '/assets/placeholder-image.webp'} alt="Image of Beach" />
+      <AspectRatio mt="10px" ratio={1}>
+        <Image
+          objectFit="cover"
+          src={image || '/assets/placeholder-image.webp'}
+          alt="Image of Beach"
+        />
       </AspectRatio>
 
       <Flex justify="space-between" flexWrap="wrap" mt="10px">
