@@ -1,11 +1,12 @@
+import { ILocation } from '@/types/location'
 import { create } from 'zustand'
 
 type LocationState = {
-  SearchedLocationLtLg: number[] | null
-  setSearchedLocationLtLg: (LtLg: number[] | null) => void
+  SearchedLocation: ILocation | null
+  setSearchedLocation: (location: ILocation | null) => void
 }
 
 export const useSearchedLocationStore = create<LocationState>((set) => ({
-  SearchedLocationLtLg: null,
-  setSearchedLocationLtLg: (LtLg) => set({ SearchedLocationLtLg: LtLg }),
+  SearchedLocation: null,
+  setSearchedLocation: (location) => set({ SearchedLocation: location }),
 }))
