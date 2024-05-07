@@ -1,7 +1,7 @@
 export interface ILocation {
-    description: string;
-    id: number;
-    latitude: number;
-    longitude: number;
-    name: string;
-  }
+  description: string
+  id: number
+  latitude: number
+  longitude: number
+  name: string
+}

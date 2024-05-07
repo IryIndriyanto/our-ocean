@@ -1,5 +1,5 @@
-import useIssue from "@/hooks/useIssue";
-import { Flex } from "@chakra-ui/react";
+import useIssue from '@/hooks/useIssue'
+import { DrawerOverlay, Flex } from '@chakra-ui/react'
 import {
   Box,
   Drawer,
@@ -8,17 +8,24 @@ import {
   DrawerContent,
   DrawerFooter,
   DrawerHeader,
-  DrawerOverlay,
   useBreakpointValue,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react'
+import TabIssue from '@/components/tabs/tab'
 
-const MapDrawer = ({ onClose, isOpen, locationId, locationName }: any) => {
-  const placement: "bottom" | "right" | undefined = useBreakpointValue({
-    base: "bottom",
-    md: "right",
-  });
-  const size = useBreakpointValue({ base: "full", md: "sm" });
-  const { issue, isLoading, isError } = useIssue(locationId);
+const MapDrawer = ({
+  onClose,
+  isOpen,
+  locationId,
+  locationName,
+  locationDescription,
+  setClickedMarker,
+}: any) => {
+  const placement: 'bottom' | 'right' | undefined = useBreakpointValue({
+    base: 'bottom',
+    md: 'right',
+  })
+  const size = useBreakpointValue({ base: 'full', md: 'sm' })
+  const { issue, isLoading, error } = useIssue(locationId)
 
   return (
     <>
@@ -29,29 +36,24 @@ const MapDrawer = ({ onClose, isOpen, locationId, locationName }: any) => {
         isOpen={isOpen}
         closeOnOverlayClick={false}
         variant="clickThrough"
-        placement={placement ? placement : "right"}
+        placement={placement ? placement : 'right'}
       >
-        {/* <DrawerOverlay /> */}
-        <DrawerContent pt={{ base: "50px", md: "110px" }}>
-          <DrawerCloseButton top={{ base: "50px", md: "120px" }} />
-          <DrawerHeader>{locationName}</DrawerHeader>
-
+        <DrawerOverlay />
+        <DrawerContent maxH={{ base: '95svh', md: 'none' }} pt={6}>
+          <DrawerCloseButton right={10} top={{ base: '20px', md: '5px' }} onClick={() => setClickedMarker({})} />
+          <DrawerHeader px={'38px'} fontSize={'x-large'}>{locationName}</DrawerHeader>
           <DrawerBody>
-            <Flex direction={"column"}>
-              {issue?.message ? <Box>{issue.massage}</Box> : null}
-              <Box fontSize={"24px"} fontStyle={"strong"} pb={"5px"}>
-                {issue?.issue_title}
-              </Box>
-              <Box>{issue?.issue_description}</Box>
-              <Box>{issue?.issue_status}</Box>
+            <Flex direction={'column'}>
+              <TabIssue locationId={locationId} locationName={locationName} locationDescription={locationDescription}/>
             </Flex>
           </DrawerBody>
-
-          <DrawerFooter>{/* Footer of the drawer */}</DrawerFooter>
+          <DrawerFooter>
+            <Box>&copy; Oceanesia 2024</Box>
+          </DrawerFooter>
         </DrawerContent>
       </Drawer>
     </>
-  );
-};
+  )
+}
 
-export default MapDrawer;
+export default MapDrawer

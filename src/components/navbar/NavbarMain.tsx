@@ -9,48 +9,48 @@ import {
   Text,
   useColorModeValue,
   useDisclosure,
-} from "@chakra-ui/react";
-import { useState, useEffect } from "react";
-import HeaderLinks from "@/components/navbar/NavbarLinksMain";
-import { isWindowAvailable } from "@/utils/navigation";
+} from '@chakra-ui/react'
+import { useState, useEffect } from 'react'
+import HeaderLinks from '@/components/navbar/NavbarLinksMain'
+import { isWindowAvailable } from '@/utils/navigation'
 
 export default function MainNavbar(props: {
-  secondary: boolean;
-  message: string | boolean;
-  brandText: string;
-  logoText: string;
-  fixed: boolean;
-  onOpen: (...args: any[]) => any;
+  secondary: boolean
+  message: string | boolean
+  brandText: string
+  logoText: string
+  fixed: boolean
+  onOpen: (...args: any[]) => any
 }) {
-  const [scrolled, setScrolled] = useState(false);
+  const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
     if (isWindowAvailable()) {
       // You now have access to `window`
-      window.addEventListener("scroll", changeNavbar);
+      window.addEventListener('scroll', changeNavbar)
 
       return () => {
-        window.removeEventListener("scroll", changeNavbar);
-      };
+        window.removeEventListener('scroll', changeNavbar)
+      }
     }
-  });
+  })
 
-  const { secondary, message, brandText } = props;
+  const { secondary, message, brandText } = props
 
-  let navbarPosition = "fixed" as const;
-  let navbarFilter = "none";
-  let navbarShadow = "none";
-  let navbarBorder = "transparent";
-  let secondaryMargin = "0px";
-  let paddingX = "15px";
-  let gap = "0px";
+  let navbarPosition = 'fixed' as const
+  let navbarFilter = 'none'
+  let navbarShadow = 'none'
+  let navbarBorder = 'transparent'
+  let secondaryMargin = '0px'
+  let paddingX = '15px'
+  let gap = '0px'
   const changeNavbar = () => {
     if (isWindowAvailable() && window.scrollY > 1) {
-      setScrolled(true);
+      setScrolled(true)
     } else {
-      setScrolled(false);
+      setScrolled(false)
     }
-  };
+  }
 
   return (
     <Box
@@ -68,44 +68,44 @@ export default function MainNavbar(props: {
       transitionDuration=" 0.25s, 0.25s, 0.25s, 0s"
       transition-property="box-shadow, background-color, filter, border"
       transitionTimingFunction="linear, linear, linear, linear"
-      alignItems={{ xl: "center" }}
-      display={secondary ? "block" : "flex"}
+      alignItems={{ xl: 'center' }}
+      display={secondary ? 'block' : 'flex'}
       minH="75px"
-      justifyContent={{ xl: "center" }}
+      justifyContent={{ xl: 'center' }}
       lineHeight="25.6px"
       mx="auto"
       mt={secondaryMargin}
       pb="8px"
-      right={{ base: "12px", md: "30px", lg: "30px", xl: "30px" }}
+      right={{ base: '12px', md: '30px', lg: '30px', xl: '30px' }}
       px={{
         sm: paddingX,
-        md: "10px",
+        md: '10px',
       }}
       ps={{
-        xl: "12px",
+        xl: '12px',
       }}
       pt="8px"
-      top={{ base: "12px", md: "16px", xl: "18px" }}
+      top={{ base: '12px', md: '16px', xl: '18px' }}
       w={{
-        base: "calc(100vw - 6%)",
-        sm: "calc(100vw - 10%)",
-        md: "calc(100vw - 8%)",
-        lg: "calc(100vw - 6%)",
-        xl: "calc(100vw - 350px)",
-        "2xl": "calc(100vw - 365px)",
+        base: 'calc(100vw - 6%)',
+        sm: 'calc(100vw - 10%)',
+        md: 'calc(100vw - 8%)',
+        lg: 'calc(100vw - 6%)',
+        xl: 'calc(100vw - 350px)',
+        '2xl': 'calc(100vw - 365px)',
       }}
-      zIndex={{ base: "1300", xl: "1500" }}
+      // zIndex={{ base: "1300", xl: "1500" }}
     >
       <Flex
         w="100%"
         flexDirection={{
-          sm: "column",
-          md: "row",
+          sm: 'column',
+          md: 'row',
         }}
-        alignItems={{ xl: "center" }}
+        alignItems={{ xl: 'center' }}
         mb={gap}
       >
-        <Box ms="auto" w={{ sm: "100%", md: "unset" }}>
+        <Box ms="auto" w={{ sm: '100%', md: 'unset' }}>
           <HeaderLinks
             onOpen={props.onOpen}
             secondary={props.secondary}
@@ -114,5 +114,5 @@ export default function MainNavbar(props: {
         </Box>
       </Flex>
     </Box>
-  );
+  )
 }

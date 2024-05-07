@@ -1,7 +1,7 @@
-"use client";
+'use client'
 
-import Map from "@/components/maps/Map";
-import { MapComponent } from "@/components/maps";
+import Map from '@/components/maps/Map'
+import { MapComponent } from '@/components/maps'
 import {
   Box,
   Flex,
@@ -11,7 +11,7 @@ import {
   Select,
   SimpleGrid,
   useColorModeValue,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react'
 
 export default function Default() {
   // Chakra Color Mode
@@ -20,5 +20,5 @@ export default function Default() {
     <>
       <MapComponent />
     </>
-  );
+  )
 }
