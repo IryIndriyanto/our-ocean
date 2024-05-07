@@ -1,4 +1,4 @@
-import { Flex } from '@chakra-ui/react'
+import { Center, Flex } from '@chakra-ui/react'
 import {
   Box,
   Tooltip,
@@ -15,8 +15,11 @@ import { HSeparator } from '@/components/separator/Separator'
 import { MdBookmarks, MdShare } from 'react-icons/md'
 import ReviewCard from '../card/ReviewCard'
 import ReportFormModal from '@/components/reports/ReportModal'
+import useIssue from '@/hooks/useIssue'
 
-const TabIssue = ({ issue, locationId, locationName,locationDescription }: any) => {
+const TabIssue = ({ locationId, locationName, locationDescription }: any) => {
+  const { issue, isLoading, error } = useIssue(locationId)
+
   return (
     <Tabs isFitted variant="unstyled">
       <TabList>
@@ -54,17 +57,23 @@ const TabIssue = ({ issue, locationId, locationName,locationDescription }: any) 
             </Flex>
           </Flex>
           <HSeparator w={'auto'} mx={-4} my={4} />
-
-          <ReviewCard
-            text={issue?.issue_description}
-            image={issue?.issue_image}
-            avatar={''}
-            name="Anonymous"
-            job="Volunteer"
-          />
+          {isLoading ? (
+            <Center>Loading...</Center>
+          ) : error?.status === 404 ? (
+            <Center>No report yet</Center>
+          ) : (
+            <ReviewCard
+              text={issue?.issue_description}
+              image={issue?.issue_image}
+              avatar={''}
+              name="Anonymous"
+              job="Volunteer"
+              title={issue.issue_title}
+            />
+          )}
         </TabPanel>
         <TabPanel>
-          <Box minH={'65vh'}>{locationDescription}</Box>
+          <Box minH={'70vh'}>{locationDescription}</Box>
         </TabPanel>
       </TabPanels>
     </Tabs>
