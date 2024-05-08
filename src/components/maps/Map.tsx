@@ -14,7 +14,6 @@ import { IconButton, useDisclosure } from '@chakra-ui/react'
 import { ILocation } from '../../types/location'
 import { ChevronLeftIcon } from '@chakra-ui/icons'
 import { useState } from 'react'
-import SearchedLocationMarker from './SearchedLocationMarker'
 
 export default function Map() {
   const ICON = icon({
@@ -114,17 +113,27 @@ export default function Map() {
   )
 }
 
-function ClickComponent() {
-  const map = useMapEvents({
-    click: (e) => {
-      const { lat, lng } = e.latlng
-      console.log('Clicked location:', lat, lng)
-      map.locate()
-    },
-    locationfound: (location) => {
-      console.log('location found:', location)
-      // map.setView(location.latlng, 12)
-    },
-  })
-  return null
+import { useSearchedLocationStore } from '@/hooks/useSearchedLocationStore'
+import { LatLngExpression } from 'leaflet'
+import { useEffect } from 'react'
+
+ function SearchedLocationMarker({ handleMarkerClick }: any) {
+  const [position, setPosition] = useState<LatLngExpression | null>(null)
+  const { SearchedLocation } = useSearchedLocationStore()
+  const map = useMapEvents({})
+
+  useEffect(() => {
+    if (SearchedLocation) {
+      setPosition([SearchedLocation.latitude, SearchedLocation.longitude])
+      map.flyTo(
+        [SearchedLocation.latitude, SearchedLocation.longitude],
+        map.getZoom(),
+      )
+      handleMarkerClick(SearchedLocation)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [SearchedLocation, map])
+
+  return position === null ? null : <div />
 }
+
