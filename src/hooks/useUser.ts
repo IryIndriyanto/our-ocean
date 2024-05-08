@@ -1,17 +1,17 @@
 import { SERVICE_URL } from '@/utils/constant'
 import useSWR from 'swr'
 
-let authToken = ''
-if (typeof window !== 'undefined') {
-  const authToken = localStorage.getItem('oceanesia-access-token')
-}
-
 type User = {
   user_id: number
   username: string
   email: string
 }
 const fetcher = async (url: string) => {
+  let authToken = ''
+
+  if (typeof window !== 'undefined') {
+    const authToken = localStorage.getItem('oceanesia-access-token')
+  }
   const response = await fetch(url, {
     method: 'GET',
     headers: {
