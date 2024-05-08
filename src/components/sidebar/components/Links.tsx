@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { IRoute } from '@/types/navigation'
 import { usePathname } from 'next/navigation'
 import { useCallback } from 'react'
+import useUser from '@/hooks/useUser'
 
 interface SidebarLinksProps {
   routes: IRoute[]
@@ -32,10 +33,16 @@ export function SidebarLinks(props: SidebarLinksProps) {
     [pathname],
   )
 
+  //user login state
+  const { isLogin } = useUser()
+
   // this function creates the links from the secondary accordions (for example auth -> sign-in -> default)
   const createLinks = (routes: IRoute[]) => {
     return routes.map((route, index: number) => {
       if (route.layout === '/main' || route.layout === '/auth') {
+        if (route.path === '/sign-in' && isLogin) {
+          return null // Skip rendering the sign-in route if user is already logged in
+        }
         return (
           <Link key={index} href={route.layout + route.path}>
             {route.icon ? (

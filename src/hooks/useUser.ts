@@ -1,8 +1,16 @@
 import { SERVICE_URL } from '@/utils/constant'
 import useSWR from 'swr'
 
-const authToken = localStorage.getItem('revou-w10-token') ?? ''
+let authToken = ''
+if (typeof window !== 'undefined') {
+  const authToken = localStorage.getItem('oceanesia-access-token') ?? ''
+}
 
+type User = {
+  user_id: number
+  username: string
+  email: string
+}
 const fetcher = async (url: string) => {
   const response = await fetch(url, {
     method: 'GET',
@@ -23,12 +31,18 @@ const fetcher = async (url: string) => {
   return await response.json()
 }
 
-export default function useUserData() {
-  const { data, error, isLoading } = useSWR(`${SERVICE_URL}/user/me`, fetcher)
+export default function useUser(): {
+  user: User
+  isLoading: boolean
+  error: any
+  isLogin: boolean
+} {
+  const { data, error, isLoading } = useSWR(`${SERVICE_URL}/users/me`, fetcher)
 
   return {
-    issue: data,
+    user: data,
     isLoading,
     error,
+    isLogin: data !== null && !isLoading && !error,
   }
 }

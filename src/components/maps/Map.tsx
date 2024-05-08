@@ -13,7 +13,7 @@ import MapDrawer from './map-drawer/MapDrawer'
 import { IconButton, useDisclosure } from '@chakra-ui/react'
 import { ILocation } from '../../types/location'
 import { ChevronLeftIcon } from '@chakra-ui/icons'
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 
 export default function Map() {
   const ICON = icon({
@@ -31,7 +31,9 @@ export default function Map() {
   const [locationName, setLocationName] = useState('Beach Name')
   const [latitude, setLatitude] = useState(-6.1754)
   const [longitude, setLongitude] = useState(106.827)
-  const [locationDescription, setLocationDescription] = useState('No Description Yet.')
+  const [locationDescription, setLocationDescription] = useState(
+    'No Description Yet.',
+  )
   const [clickedMarkers, setClickedMarker] = useState<{
     [key: string]: boolean
   }>({})
@@ -71,20 +73,22 @@ export default function Map() {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        {locations && locations.map((location: ILocation) => (
-          <Marker
-            key={location.id}
-            position={[location.latitude, location.longitude]}
-            icon={clickedMarkers[location.id] ? ICON_CLICKED : ICON}
-            eventHandlers={{
-              click: () => {
-                handleMarkerClick(location)
-              },
-            }}
-          >
-            <Tooltip >{location.name}</Tooltip>
-          </Marker>
-        ))}
+        {locations &&
+          locations.length > 0 &&
+          locations.map((location: ILocation) => (
+            <Marker
+              key={location.id}
+              position={[location.latitude, location.longitude]}
+              icon={clickedMarkers[location.id] ? ICON_CLICKED : ICON}
+              eventHandlers={{
+                click: () => {
+                  handleMarkerClick(location)
+                },
+              }}
+            >
+              <Tooltip>{location.name}</Tooltip>
+            </Marker>
+          ))}
       </MapContainer>
       <IconButton
         icon={<ChevronLeftIcon />}
