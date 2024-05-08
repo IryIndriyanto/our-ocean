@@ -1,7 +1,11 @@
 import { SERVICE_URL } from '@/utils/constant'
 import useSWR from 'swr'
 
-const authToken = localStorage.getItem('oceanesia-access-token') ?? ''
+let authToken = ''
+if (typeof window !== 'undefined') {
+  const authToken = localStorage.getItem('oceanesia-access-token') ?? ''
+}
+
 type User = {
   user_id: number
   username: string

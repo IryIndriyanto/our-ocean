@@ -64,7 +64,9 @@ export default function SignInForm() {
       if (response.ok) {
         const data = await response.json()
         const authToken = data.access_token
-        localStorage.setItem(ACCESS_TOKEN, authToken)
+        if (typeof window !== 'undefined') {
+          localStorage.setItem(ACCESS_TOKEN, authToken)
+        }
         //close modal
         onClose()
         router.replace('/main/map')
@@ -198,7 +200,7 @@ export default function SignInForm() {
         <ModalContent m={'auto'}>
           <ModalBody>
             <Center px={6} py={4}>
-              <Spinner mx={2}/> Log in to Oceanesia...
+              <Spinner mx={2} /> Log in to Oceanesia...
             </Center>
           </ModalBody>
         </ModalContent>
