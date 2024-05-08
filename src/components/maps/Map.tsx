@@ -68,7 +68,7 @@ export default function Map() {
         zoom={9}
         zoomControl={false}
       >
-        <SearchedLocationMarker handleMarker={handleMarkerClick} />
+        <SearchedLocationMarker handleMarkerClick={handleMarkerClick} />
         <ZoomControl position="bottomright" />
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
