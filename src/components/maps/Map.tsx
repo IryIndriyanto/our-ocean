@@ -14,6 +14,7 @@ import { IconButton, useDisclosure } from '@chakra-ui/react'
 import { ILocation } from '../../types/location'
 import { ChevronLeftIcon } from '@chakra-ui/icons'
 import { useState } from 'react'
+import SearchedLocationMarker from './SearchedLocationMarker'
 
 export default function Map() {
   const ICON = icon({
@@ -27,6 +28,7 @@ export default function Map() {
 
   const { locations } = useLocation()
   const { isOpen, onOpen, onClose } = useDisclosure()
+
   const [locationId, setLocationId] = useState(2)
   const [locationName, setLocationName] = useState('Beach Name')
   const [latitude, setLatitude] = useState(-6.1754)
@@ -67,7 +69,7 @@ export default function Map() {
         zoom={9}
         zoomControl={false}
       >
-        <ClickComponent />
+        <SearchedLocationMarker handleMarker={handleMarkerClick} />
         <ZoomControl position="bottomright" />
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
