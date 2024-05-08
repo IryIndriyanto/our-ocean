@@ -3,7 +3,7 @@ import useSWR from 'swr'
 
 let authToken = ''
 if (typeof window !== 'undefined') {
-  const authToken = localStorage.getItem('oceanesia-access-token') ?? ''
+  const authToken = localStorage.getItem('oceanesia-access-token')
 }
 
 type User = {
