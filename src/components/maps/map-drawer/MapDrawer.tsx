@@ -26,6 +26,7 @@ import TabIssue from '@/components/tabs/tab'
 import DeleteModal from './DeleteModal'
 import { BsThreeDotsVertical } from 'react-icons/bs'
 import { SERVICE_URL } from '@/utils/constant'
+import { useState } from 'react'
 
 const MapDrawer = ({
   onClose,
@@ -42,8 +43,11 @@ const MapDrawer = ({
   const size = useBreakpointValue({ base: 'full', md: 'sm' })
   const modal = useDisclosure()
   const toast = useToast()
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleDelete = async () => {
+    setIsLoading(true)
+
     try {
       const response = await fetch(`${SERVICE_URL}/locations/${locationId}`, {
         method: 'DELETE',
@@ -60,6 +64,7 @@ const MapDrawer = ({
           duration: 3000,
           isClosable: true,
         })
+        setIsLoading(false)
       } else {
         modal.onClose()
         toast({
@@ -69,6 +74,7 @@ const MapDrawer = ({
           duration: 3000,
           isClosable: true,
         })
+        setIsLoading(false)
       }
     } catch (error) {
       console.error('Error submitting form:', error)
@@ -112,7 +118,8 @@ const MapDrawer = ({
                       onClose={modal.onClose}
                       item="location"
                       onDelete={handleDelete}
-                    ></DeleteModal>
+                      isLoading={isLoading}
+                    />
                     <VStack fontSize="16px" fontWeight="400">
                       <Center _hover={{ fontWeight: '600' }} cursor={'pointer'}>
                         Edit
