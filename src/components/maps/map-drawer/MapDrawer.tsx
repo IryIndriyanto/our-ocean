@@ -1,4 +1,3 @@
-import useIssue from '@/hooks/useIssue'
 import {
   Center,
   DrawerOverlay,
@@ -10,6 +9,7 @@ import {
   PopoverTrigger,
   Text,
   useDisclosure,
+  useToast,
   VStack,
 } from '@chakra-ui/react'
 import {
@@ -23,8 +23,9 @@ import {
   useBreakpointValue,
 } from '@chakra-ui/react'
 import TabIssue from '@/components/tabs/tab'
-import { BsThreeDotsVertical } from 'react-icons/bs'
 import DeleteModal from './DeleteModal'
+import { BsThreeDotsVertical } from 'react-icons/bs'
+import { SERVICE_URL } from '@/utils/constant'
 
 const MapDrawer = ({
   onClose,
@@ -39,8 +40,40 @@ const MapDrawer = ({
     md: 'right',
   })
   const size = useBreakpointValue({ base: 'full', md: 'sm' })
-  const { issue, isLoading, error } = useIssue(locationId)
   const modal = useDisclosure()
+  const toast = useToast()
+
+  const handleDelete = async () => {
+    try {
+      const response = await fetch(`${SERVICE_URL}/locations/${locationId}`, {
+        method: 'DELETE',
+      })
+
+      if (response.ok) {
+        //close modal
+        modal.onClose()
+
+        toast({
+          title: 'Location deleted',
+          description: 'Location deleted successfully',
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+        })
+      } else {
+        modal.onClose()
+        toast({
+          title: 'Failed',
+          description: 'There was an error.',
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+        })
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error)
+    }
+  }
 
   return (
     <>
@@ -77,7 +110,8 @@ const MapDrawer = ({
                     <DeleteModal
                       isOpen={modal.isOpen}
                       onClose={modal.onClose}
-                      item='location'
+                      item="location"
+                      onDelete={handleDelete}
                     ></DeleteModal>
                     <VStack fontSize="16px" fontWeight="400">
                       <Center _hover={{ fontWeight: '600' }} cursor={'pointer'}>
