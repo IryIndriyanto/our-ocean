@@ -141,3 +141,5 @@ function SearchedLocationMarker({ handleMarkerClick }: any) {
 
   return position === null ? null : <div />
 }
+
+
