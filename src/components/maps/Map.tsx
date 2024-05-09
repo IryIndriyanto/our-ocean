@@ -7,15 +7,23 @@ import {
   ZoomControl,
   Tooltip,
 } from 'react-leaflet'
-import { icon } from 'leaflet'
+import { icon, LatLng } from 'leaflet'
 import useLocation from '@/hooks/useLocation'
 import MapDrawer from './map-drawer/MapDrawer'
-import { IconButton, Portal, useDisclosure } from '@chakra-ui/react'
+import {
+  Button,
+  IconButton,
+  Portal,
+  useColorModeValue,
+  useDisclosure,
+} from '@chakra-ui/react'
 import { ILocation } from '../../types/location'
 import { ChevronLeftIcon } from '@chakra-ui/icons'
 import { useState } from 'react'
 
 export default function Map() {
+  let ButtonBg = useColorModeValue('white', 'navy.800')
+
   const ICON = icon({
     iconUrl: '/assets/location.png',
     iconSize: [30, 30],
@@ -91,13 +99,14 @@ export default function Map() {
             </Marker>
           ))}
         <Portal>
-          <AddLocation/>
+          <AddLocation />
+          <LocateUserPosition />
         </Portal>
       </MapContainer>
       <IconButton
         icon={<ChevronLeftIcon />}
         aria-label="Open drawer"
-        colorScheme='blue'
+        bg={ButtonBg}
         onClick={onOpen}
         position="fixed"
         top={40}
@@ -121,6 +130,7 @@ import { useSearchedLocationStore } from '@/hooks/useSearchedLocationStore'
 import { LatLngExpression } from 'leaflet'
 import { useEffect } from 'react'
 import AddLocation from './add-location/AddLocation'
+import { IoMdLocate } from 'react-icons/io'
 
 function SearchedLocationMarker({ handleMarkerClick }: any) {
   const [position, setPosition] = useState<LatLngExpression | null>(null)
@@ -142,4 +152,45 @@ function SearchedLocationMarker({ handleMarkerClick }: any) {
   return position === null ? null : <div />
 }
 
+function LocateUserPosition() {
+  const ICON = icon({
+    iconUrl: '/assets/user-location.png',
+    iconSize: [30, 30],
+  })
+  let ButtonBg = useColorModeValue('white', 'navy.800')
 
+  const [position, setPosition] = useState<LatLng | null>(null)
+  const map = useMapEvents({
+    locationfound(e) {
+      setPosition(e.latlng)
+      map.flyTo(e.latlng, map.getZoom())
+    },
+  })
+
+  const handleLocateClick = () => {
+    map.locate()
+  }
+
+  return (
+    <>
+      <Button
+        bottom={'100px'}
+        left={{ base: '10px', xl: '300px' }}
+        position={'fixed'}
+        onClick={handleLocateClick}
+        w="45px"
+        h="45px"
+        p="8px"
+        borderRadius="50%"
+        bg={ButtonBg}
+      >
+        <IoMdLocate size={50} />
+      </Button>
+      {position === null ? null : (
+        <Marker icon={ICON} position={position}>
+          <Popup>You are here</Popup>
+        </Marker>
+      )}
+    </>
+  )
+}
