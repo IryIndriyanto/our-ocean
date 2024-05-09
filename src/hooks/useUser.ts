@@ -10,7 +10,7 @@ const fetcher = async (url: string) => {
   let authToken = ''
 
   if (typeof window !== 'undefined') {
-    authToken = localStorage.getItem('oceanesia-access-token')??''
+    authToken = localStorage.getItem('oceanesia-access-token') ?? ''
   }
   const response = await fetch(url, {
     method: 'GET',
@@ -23,7 +23,7 @@ const fetcher = async (url: string) => {
     const error: any = new Error(
       'An error occurred while fetching user detail.',
     )
-    console.log(authToken)
+
     // Attach extra info to the error object.
     error.info = await response.json()
     error.status = response.status

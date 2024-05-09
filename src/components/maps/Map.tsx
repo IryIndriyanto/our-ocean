@@ -10,7 +10,7 @@ import {
 import { icon } from 'leaflet'
 import useLocation from '@/hooks/useLocation'
 import MapDrawer from './map-drawer/MapDrawer'
-import { IconButton, useDisclosure } from '@chakra-ui/react'
+import { IconButton, Portal, useDisclosure } from '@chakra-ui/react'
 import { ILocation } from '../../types/location'
 import { ChevronLeftIcon } from '@chakra-ui/icons'
 import { useState } from 'react'
@@ -90,10 +90,14 @@ export default function Map() {
               <Tooltip>{location.name}</Tooltip>
             </Marker>
           ))}
+        <Portal>
+          <AddLocation/>
+        </Portal>
       </MapContainer>
       <IconButton
         icon={<ChevronLeftIcon />}
         aria-label="Open drawer"
+        colorScheme='blue'
         onClick={onOpen}
         position="fixed"
         top={40}
@@ -116,8 +120,9 @@ export default function Map() {
 import { useSearchedLocationStore } from '@/hooks/useSearchedLocationStore'
 import { LatLngExpression } from 'leaflet'
 import { useEffect } from 'react'
+import AddLocation from './add-location/AddLocation'
 
- function SearchedLocationMarker({ handleMarkerClick }: any) {
+function SearchedLocationMarker({ handleMarkerClick }: any) {
   const [position, setPosition] = useState<LatLngExpression | null>(null)
   const { SearchedLocation } = useSearchedLocationStore()
   const map = useMapEvents({})
@@ -131,9 +136,8 @@ import { useEffect } from 'react'
       )
       handleMarkerClick(SearchedLocation)
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [SearchedLocation, map])
 
   return position === null ? null : <div />
 }
-
