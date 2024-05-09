@@ -25,6 +25,7 @@ import { IoMdMoon, IoMdSunny } from 'react-icons/io'
 import { MdNotificationsNone } from 'react-icons/md'
 import routes from '@/routes'
 import useUser from '@/hooks/useUser'
+import { ACCESS_TOKEN } from '@/utils/constant'
 
 export default function HeaderLinks(props: {
   secondary: boolean
@@ -46,6 +47,12 @@ export default function HeaderLinks(props: {
   const borderButton = useColorModeValue('secondaryGray.500', 'whiteAlpha.200')
 
   const { user, isLogin } = useUser()
+  const handleLogout = () => {
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem(ACCESS_TOKEN)
+      window.location.reload()
+    }    
+  }
 
   return (
     <Flex
@@ -219,7 +226,7 @@ export default function HeaderLinks(props: {
                   borderRadius="8px"
                   px="14px"
                 >
-                  <Text fontSize="sm">Log out</Text>
+                  <Text onClick={handleLogout} fontSize="sm">Log out</Text>
                 </MenuItem>
               </>
             )}

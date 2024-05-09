@@ -27,6 +27,7 @@ import DeleteModal from './DeleteModal'
 import { BsThreeDotsVertical } from 'react-icons/bs'
 import { SERVICE_URL } from '@/utils/constant'
 import { useState } from 'react'
+import useUser from '@/hooks/useUser'
 
 const MapDrawer = ({
   onClose,
@@ -44,6 +45,7 @@ const MapDrawer = ({
   const modal = useDisclosure()
   const toast = useToast()
   const [isLoading, setIsLoading] = useState(false)
+  const { user, isLogin } = useUser()
 
   const handleDelete = async () => {
     setIsLoading(true)
@@ -102,40 +104,45 @@ const MapDrawer = ({
           <DrawerHeader px={'38px'}>
             <Flex alignItems="center" justifyContent="space-between">
               <Text fontSize={'x-large'}> {locationName}</Text>
-              <Popover offset={[-30, 0]}>
-                <PopoverTrigger>
-                  <IconButton
-                    variant="ghost"
-                    colorScheme="gray"
-                    aria-label="See menu"
-                    icon={<BsThreeDotsVertical />}
-                  />
-                </PopoverTrigger>
-                <PopoverContent w={20}>
-                  <PopoverBody>
-                    <DeleteModal
-                      isOpen={modal.isOpen}
-                      onClose={modal.onClose}
-                      item="location"
-                      onDelete={handleDelete}
-                      isLoading={isLoading}
+              {isLogin && (
+                <Popover offset={[-30, 0]}>
+                  <PopoverTrigger>
+                    <IconButton
+                      variant="ghost"
+                      colorScheme="gray"
+                      aria-label="See menu"
+                      icon={<BsThreeDotsVertical />}
                     />
-                    <VStack fontSize="16px" fontWeight="400">
-                      <Center _hover={{ fontWeight: '600' }} cursor={'pointer'}>
-                        Edit
-                      </Center>
-                      <Center
-                        _hover={{ fontWeight: '600' }}
-                        cursor={'pointer'}
-                        color={'red'}
-                        onClick={modal.onOpen}
-                      >
-                        Delete
-                      </Center>
-                    </VStack>
-                  </PopoverBody>
-                </PopoverContent>
-              </Popover>
+                  </PopoverTrigger>
+                  <PopoverContent w={20}>
+                    <PopoverBody>
+                      <DeleteModal
+                        isOpen={modal.isOpen}
+                        onClose={modal.onClose}
+                        item="location"
+                        onDelete={handleDelete}
+                        isLoading={isLoading}
+                      />
+                      <VStack fontSize="16px" fontWeight="400">
+                        <Center
+                          _hover={{ fontWeight: '600' }}
+                          cursor={'pointer'}
+                        >
+                          Edit
+                        </Center>
+                        <Center
+                          _hover={{ fontWeight: '600' }}
+                          cursor={'pointer'}
+                          color={'red'}
+                          onClick={modal.onOpen}
+                        >
+                          Delete
+                        </Center>
+                      </VStack>
+                    </PopoverBody>
+                  </PopoverContent>
+                </Popover>
+              )}
             </Flex>
           </DrawerHeader>
           <DrawerBody>
