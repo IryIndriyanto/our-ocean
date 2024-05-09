@@ -52,7 +52,7 @@ export default function ReviewCard(props: {
             </Text>
           </Flex>
         </Flex>
-        <Popover>
+        <Popover offset={[-30, 0]}>
           <PopoverTrigger>
             <IconButton
               variant="ghost"
@@ -64,8 +64,14 @@ export default function ReviewCard(props: {
           <PopoverContent w={20}>
             <PopoverBody>
               <VStack>
-                <Center cursor={'pointer'}>Edit</Center>
-                <Center cursor={'pointer'} color={'red'}>
+                <Center _hover={{ fontWeight: '600' }} cursor={'pointer'}>
+                  Edit
+                </Center>
+                <Center
+                  _hover={{ fontWeight: '600' }}
+                  cursor={'pointer'}
+                  color={'red'}
+                >
                   Delete
                 </Center>
               </VStack>
