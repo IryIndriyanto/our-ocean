@@ -17,7 +17,7 @@ import { ILocation } from '@/types/location'
 import { ChangeEvent, useRef, useState } from 'react'
 import { InputRightElement } from '@chakra-ui/react'
 import useSearchLocationName from '@/hooks/useSearchLocationName'
-import { useSearchedLocationStore } from '@/hooks/useSearchedLocation'
+import { useSearchedLocationStore } from '@/hooks/useSearchedLocationStore'
 
 export function SearchBar(props: {
   variant?: string
@@ -118,7 +118,10 @@ export function SearchBar(props: {
                   cursor={'pointer'}
                   _hover={{ fontWeight: 'semibold' }}
                   key={location.id}
-                  onClick={() => setSearchedLocation(location)}
+                  onClick={() => {
+                    setSearchedLocation(location)
+                    setSearchTerm('')
+                  }}
                 >
                   {location.name}
                 </Box>

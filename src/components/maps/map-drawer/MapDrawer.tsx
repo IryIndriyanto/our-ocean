@@ -1,5 +1,17 @@
-import useIssue from '@/hooks/useIssue'
-import { DrawerOverlay, Flex } from '@chakra-ui/react'
+import {
+  Center,
+  DrawerOverlay,
+  Flex,
+  IconButton,
+  Popover,
+  PopoverBody,
+  PopoverContent,
+  PopoverTrigger,
+  Text,
+  useDisclosure,
+  useToast,
+  VStack,
+} from '@chakra-ui/react'
 import {
   Box,
   Drawer,
@@ -11,6 +23,10 @@ import {
   useBreakpointValue,
 } from '@chakra-ui/react'
 import TabIssue from '@/components/tabs/tab'
+import DeleteModal from './DeleteModal'
+import { BsThreeDotsVertical } from 'react-icons/bs'
+import { SERVICE_URL } from '@/utils/constant'
+import { useState } from 'react'
 
 const MapDrawer = ({
   onClose,
@@ -25,7 +41,45 @@ const MapDrawer = ({
     md: 'right',
   })
   const size = useBreakpointValue({ base: 'full', md: 'sm' })
-  const { issue, isLoading, error } = useIssue(locationId)
+  const modal = useDisclosure()
+  const toast = useToast()
+  const [isLoading, setIsLoading] = useState(false)
+
+  const handleDelete = async () => {
+    setIsLoading(true)
+
+    try {
+      const response = await fetch(`${SERVICE_URL}/locations/${locationId}`, {
+        method: 'DELETE',
+      })
+
+      if (response.ok) {
+        //close modal
+        modal.onClose()
+
+        toast({
+          title: 'Location deleted',
+          description: 'Location deleted successfully',
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+        })
+        setIsLoading(false)
+      } else {
+        modal.onClose()
+        toast({
+          title: 'Failed',
+          description: 'There was an error.',
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+        })
+        setIsLoading(false)
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error)
+    }
+  }
 
   return (
     <>
@@ -40,11 +94,57 @@ const MapDrawer = ({
       >
         <DrawerOverlay />
         <DrawerContent maxH={{ base: '95svh', md: 'none' }} pt={6}>
-          <DrawerCloseButton right={10} top={{ base: '20px', md: '5px' }} onClick={() => setClickedMarker({})} />
-          <DrawerHeader px={'38px'} fontSize={'x-large'}>{locationName}</DrawerHeader>
+          <DrawerCloseButton
+            right={10}
+            top={{ base: '20px', md: '5px' }}
+            onClick={() => setClickedMarker({})}
+          />
+          <DrawerHeader px={'38px'}>
+            <Flex alignItems="center" justifyContent="space-between">
+              <Text fontSize={'x-large'}> {locationName}</Text>
+              <Popover offset={[-30, 0]}>
+                <PopoverTrigger>
+                  <IconButton
+                    variant="ghost"
+                    colorScheme="gray"
+                    aria-label="See menu"
+                    icon={<BsThreeDotsVertical />}
+                  />
+                </PopoverTrigger>
+                <PopoverContent w={20}>
+                  <PopoverBody>
+                    <DeleteModal
+                      isOpen={modal.isOpen}
+                      onClose={modal.onClose}
+                      item="location"
+                      onDelete={handleDelete}
+                      isLoading={isLoading}
+                    />
+                    <VStack fontSize="16px" fontWeight="400">
+                      <Center _hover={{ fontWeight: '600' }} cursor={'pointer'}>
+                        Edit
+                      </Center>
+                      <Center
+                        _hover={{ fontWeight: '600' }}
+                        cursor={'pointer'}
+                        color={'red'}
+                        onClick={modal.onOpen}
+                      >
+                        Delete
+                      </Center>
+                    </VStack>
+                  </PopoverBody>
+                </PopoverContent>
+              </Popover>
+            </Flex>
+          </DrawerHeader>
           <DrawerBody>
             <Flex direction={'column'}>
-              <TabIssue locationId={locationId} locationName={locationName} locationDescription={locationDescription}/>
+              <TabIssue
+                locationId={locationId}
+                locationName={locationName}
+                locationDescription={locationDescription}
+              />
             </Flex>
           </DrawerBody>
           <DrawerFooter>

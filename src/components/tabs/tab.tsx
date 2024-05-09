@@ -63,12 +63,13 @@ const TabIssue = ({ locationId, locationName, locationDescription }: any) => {
             <Center>No report yet</Center>
           ) : (
             <ReviewCard
+              issueId={issue?.id}
               text={issue?.issue_description}
               image={issue?.issue_image}
               avatar={''}
               name="Anonymous"
               job="Volunteer"
-              title={issue.issue_title}
+              title={issue?.issue_title}
             />
           )}
         </TabPanel>

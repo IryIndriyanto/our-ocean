@@ -1,17 +1,17 @@
 import { SERVICE_URL } from '@/utils/constant'
 import useSWR from 'swr'
 
-let authToken = ''
-if (typeof window !== 'undefined') {
-  const authToken = localStorage.getItem('oceanesia-access-token') ?? ''
-}
-
 type User = {
   user_id: number
   username: string
   email: string
 }
 const fetcher = async (url: string) => {
+  let authToken = ''
+
+  if (typeof window !== 'undefined') {
+    authToken = localStorage.getItem('oceanesia-access-token') ?? ''
+  }
   const response = await fetch(url, {
     method: 'GET',
     headers: {
@@ -23,6 +23,7 @@ const fetcher = async (url: string) => {
     const error: any = new Error(
       'An error occurred while fetching user detail.',
     )
+
     // Attach extra info to the error object.
     error.info = await response.json()
     error.status = response.status

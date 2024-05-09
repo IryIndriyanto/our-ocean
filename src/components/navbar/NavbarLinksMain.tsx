@@ -24,6 +24,7 @@ import { SidebarResponsive } from '@/components/sidebar/Sidebar'
 import { IoMdMoon, IoMdSunny } from 'react-icons/io'
 import { MdNotificationsNone } from 'react-icons/md'
 import routes from '@/routes'
+import useUser from '@/hooks/useUser'
 
 export default function HeaderLinks(props: {
   secondary: boolean
@@ -43,6 +44,8 @@ export default function HeaderLinks(props: {
     '14px 17px 40px 4px rgba(112, 144, 176, 0.06)',
   )
   const borderButton = useColorModeValue('secondaryGray.500', 'whiteAlpha.200')
+
+  const { user, isLogin } = useUser()
 
   return (
     <Flex
@@ -155,7 +158,7 @@ export default function HeaderLinks(props: {
           />
           <Center top={0} left={0} position={'absolute'} w={'100%'} h={'100%'}>
             <Text fontSize={'xs'} fontWeight="bold" color={'white'}>
-              AP
+              OC
             </Text>
           </Center>
         </MenuButton>
@@ -179,11 +182,12 @@ export default function HeaderLinks(props: {
               fontWeight="700"
               color={textColor}
             >
-              👋&nbsp; Hey, Adela
+              👋&nbsp; Hey, {user?.username || 'Anonymous'}
             </Text>
           </Flex>
+
           <Flex flexDirection="column" p="10px">
-            <Link href="/main/account">
+            <Link href="/auth/sign-in">
               <MenuItem
                 _hover={{ bg: 'none' }}
                 _focus={{ bg: 'none' }}
@@ -191,18 +195,34 @@ export default function HeaderLinks(props: {
                 borderRadius="8px"
                 px="14px"
               >
-                <Text fontSize="sm">Account</Text>
+                <Text fontSize="sm">Please Login</Text>
               </MenuItem>
             </Link>
-            <MenuItem
-              _hover={{ bg: 'none' }}
-              _focus={{ bg: 'none' }}
-              color="red.400"
-              borderRadius="8px"
-              px="14px"
-            >
-              <Text fontSize="sm">Log out</Text>
-            </MenuItem>
+            {isLogin && (
+              <>
+                <Link href="/main/account">
+                  <MenuItem
+                    _hover={{ bg: 'none' }}
+                    _focus={{ bg: 'none' }}
+                    color={textColor}
+                    borderRadius="8px"
+                    px="14px"
+                  >
+                    <Text fontSize="sm">Account</Text>
+                  </MenuItem>
+                </Link>
+
+                <MenuItem
+                  _hover={{ bg: 'none' }}
+                  _focus={{ bg: 'none' }}
+                  color="red.400"
+                  borderRadius="8px"
+                  px="14px"
+                >
+                  <Text fontSize="sm">Log out</Text>
+                </MenuItem>
+              </>
+            )}
           </Flex>
         </MenuList>
       </Menu>
