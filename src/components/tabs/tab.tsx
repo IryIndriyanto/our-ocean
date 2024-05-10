@@ -70,7 +70,7 @@ const TabIssue = ({ locationId, locationName, locationDescription }: any) => {
               name="Anonymous"
               job="Volunteer"
               title={issue?.issue_title}
-              status={issue?.status}
+              status={issue?.issue_status}
             />
           )}
         </TabPanel>
