@@ -51,7 +51,7 @@ export default function HeaderLinks(props: {
     if (typeof window !== 'undefined') {
       localStorage.removeItem(ACCESS_TOKEN)
       window.location.reload()
-    }    
+    }
   }
 
   return (
@@ -195,15 +195,17 @@ export default function HeaderLinks(props: {
 
           <Flex flexDirection="column" p="10px">
             <Link href="/auth/sign-in">
-              <MenuItem
-                _hover={{ bg: 'none' }}
-                _focus={{ bg: 'none' }}
-                color={textColor}
-                borderRadius="8px"
-                px="14px"
-              >
-                <Text fontSize="sm">Please Login</Text>
-              </MenuItem>
+              {!isLogin && (
+                <MenuItem
+                  _hover={{ bg: 'none' }}
+                  _focus={{ bg: 'none' }}
+                  color={textColor}
+                  borderRadius="8px"
+                  px="14px"
+                >
+                  <Text fontSize="sm">Please Login</Text>
+                </MenuItem>
+              )}
             </Link>
             {isLogin && (
               <>
@@ -226,7 +228,9 @@ export default function HeaderLinks(props: {
                   borderRadius="8px"
                   px="14px"
                 >
-                  <Text onClick={handleLogout} fontSize="sm">Log out</Text>
+                  <Text onClick={handleLogout} fontSize="sm">
+                    Log out
+                  </Text>
                 </MenuItem>
               </>
             )}

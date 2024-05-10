@@ -4,12 +4,14 @@ import {
   Center,
   FormControl,
   FormLabel,
+  Highlight,
   Input,
   Modal,
   ModalBody,
   ModalContent,
   ModalOverlay,
   Spinner,
+  Text,
   Textarea,
   useDisclosure,
   useToast,
@@ -75,25 +77,51 @@ export default function AddLocationForm({
   return (
     <>
       <form onSubmit={handleSubmit}>
+        <Center>
+          <Highlight
+            query="Select location on map to set coordinates"
+            styles={{ px: '1', py: '1', bg: 'navy.500', color: 'white' }}
+          >
+            Select location on map to set coordinates
+          </Highlight>
+        </Center>
+
         <FormControl my="8px">
-          <FormLabel mb="4px">Latitude</FormLabel>
-          <Input type="text" disabled value={latitudeSelected} />
-          <FormLabel>Longitude</FormLabel>
-          <Input type="text" disabled value={longitudeSelected} />
-          <FormLabel>Location Name</FormLabel>
+          <FormLabel fontSize={'14px'} mb="4px">
+            Latitude
+          </FormLabel>
           <Input
+            fontSize={'14px'}
+            h={'30px'}
+            type="text"
+            disabled
+            value={latitudeSelected}
+          />
+          <FormLabel fontSize={'14px'}>Longitude</FormLabel>
+          <Input
+            fontSize={'14px'}
+            h={'30px'}
+            type="text"
+            disabled
+            value={longitudeSelected}
+          />
+          <FormLabel fontSize={'14px'}>Location Name</FormLabel>
+          <Input
+            fontSize={'14px'}
+            h={'30px'}
             type="text"
             placeholder="Enter location name"
             onChange={(e) => setLocationName(e.target.value)}
           />
-          <FormLabel>Location Description</FormLabel>
+          <FormLabel fontSize={'14px'}>Location Description</FormLabel>
           <Textarea
+            fontSize={'14px'}
             placeholder="Enter location description"
             onChange={(e) => setLocationDescription(e.target.value)}
           />
         </FormControl>
         {/* Add more form controls for other fields */}
-        <Button  type="submit" variant="brand" w="100%" mt={4}>
+        <Button type="submit" variant="brand" w="100%" mt={4}>
           Add New Location
         </Button>
       </form>

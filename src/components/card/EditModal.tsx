@@ -24,6 +24,7 @@ const EditIssueModal = ({
 }) => {
   const [status, setStatus] = useState<string>('')
   const toast = useToast()
+
   const handleSubmit = async () => {
     try {
       const response = await fetch(`${SERVICE_URL}/issues/${issueId}`, {
@@ -61,10 +62,12 @@ const EditIssueModal = ({
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent m={'auto'}>
-        <ModalHeader >Edit Issue</ModalHeader>
+        <ModalHeader>Edit Issue</ModalHeader>
         <ModalBody>
-          <Text mb={'10px'} fontSize="lg">Select a new status for the issue:</Text>
-          <Select value={status} onChange={(e) => setStatus(e.target.value)}>
+          <Text mb={'10px'} fontSize="lg">
+            Select a new status for the issue:
+          </Text>
+          <Select placeholder='please select' value={status} onChange={(e) => setStatus(e.target.value)}>
             <option value="OPEN">Open</option>
             <option value="IN_PROGRESS">In Progress</option>
             <option value="CLOSED">Closed</option>

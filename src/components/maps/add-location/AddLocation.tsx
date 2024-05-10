@@ -22,7 +22,7 @@ export default function AddLocation() {
 
   return (
     <>
-      <Popover offset={[100, 10]} closeOnBlur={false}>
+      <Popover offset={[80, 10]} closeOnBlur={false}>
         <PopoverTrigger>
           <Button
             ref={buttonRef}
@@ -38,7 +38,7 @@ export default function AddLocation() {
             {selectLocation ? 'Cancel' : 'Add Location'}
           </Button>
         </PopoverTrigger>
-        <PopoverContent w={360} p={4} borderRadius={20}>
+        <PopoverContent fontSize={'14px'} w={'300px'} p={'6px'} borderRadius={20}>
           <PopoverHeader fontWeight={700} fontSize={'large'}>
             <Center pb="4px">Add New Location</Center>
           </PopoverHeader>
