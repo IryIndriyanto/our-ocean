@@ -150,7 +150,7 @@ export default function ReviewCard(props: {
           </Flex>
         </Flex>
         {isLogin && (
-          <Popover offset={[-30, 0]}>
+          <Popover offset={[-50, 0]}>
             <PopoverTrigger>
               <IconButton
                 variant="ghost"
@@ -159,7 +159,7 @@ export default function ReviewCard(props: {
                 icon={<BsThreeDotsVertical />}
               />
             </PopoverTrigger>
-            <PopoverContent w={20}>
+            <PopoverContent w='120px' fontSize={'14px'}>
               <PopoverBody>
                 <VStack>
                   <Center
