@@ -16,6 +16,7 @@ import {
   Portal,
   useColorModeValue,
   useDisclosure,
+  Tooltip as ChakraTooltip,
 } from '@chakra-ui/react'
 import { ILocation } from '../../types/location'
 import { ChevronLeftIcon } from '@chakra-ui/icons'
@@ -163,7 +164,7 @@ function LocateUserPosition() {
   const map = useMapEvents({
     locationfound(e) {
       setPosition(e.latlng)
-      map.flyTo(e.latlng, map.getZoom())
+      map.flyTo(e.latlng, 12)
     },
   })
 
@@ -173,19 +174,22 @@ function LocateUserPosition() {
 
   return (
     <>
-      <Button
-        bottom={'100px'}
-        left={{ base: '10px', xl: '300px' }}
-        position={'fixed'}
-        onClick={handleLocateClick}
-        w="45px"
-        h="45px"
-        p="8px"
-        borderRadius="50%"
-        bg={ButtonBg}
-      >
-        <IoMdLocate size={50} />
-      </Button>
+      <ChakraTooltip placement='top' label="Locate">
+        <Button
+          bottom={'100px'}
+          left={{ base: '30px', xl: '300px' }}
+          position={'fixed'}
+          onClick={handleLocateClick}
+          w="45px"
+          h="45px"
+          p="8px"
+          borderRadius="50%"
+          bg={ButtonBg}
+        >
+          <IoMdLocate size={50} />
+        </Button>
+      </ChakraTooltip>
+
       {position === null ? null : (
         <Marker icon={ICON} position={position}>
           <Popup>You are here</Popup>

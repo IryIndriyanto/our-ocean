@@ -23,7 +23,7 @@ export default function useIssue(id: number) {
   const { data, error, isLoading } = useSWR(
     `${SERVICE_URL}/issues/location/${id}`,
     fetcher,
-    { shouldRetryOnError: false },
+    { refreshInterval: 2000 },
   )
 
   return {
