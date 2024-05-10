@@ -16,6 +16,7 @@ import {
   Center,
   useDisclosure,
   useToast,
+  Tag
 } from '@chakra-ui/react'
 import { BiLike, BiChat, BiShare } from 'react-icons/bi'
 import { BsThreeDotsVertical } from 'react-icons/bs'
@@ -34,9 +35,10 @@ export default function ReviewCard(props: {
   job: string
   text: string
   title: string
+  status: string
   [x: string]: any
 }) {
-  const { issueId, image, avatar, name, job, text, title, ...rest } = props
+  const { issueId, image, avatar, name, job, text, title, status, ...rest } = props
   const textColorPrimary = useColorModeValue('secondaryGray.900', 'white')
   const textColorSecondary = 'gray.400'
   const borderColor = useColorModeValue('white', '#111C44')
@@ -81,6 +83,34 @@ export default function ReviewCard(props: {
     }
   }
 
+  const getStatusTagProps = () => {
+    let tagColor: string = ''
+    let tagText: string = ''
+
+    switch (status) {
+      case 'Open':
+        tagColor = 'white'
+        tagText = 'Open'
+        break
+      case 'In Progress':
+        tagColor = 'white'
+        tagText = 'In Progress'
+        break
+      case 'Closed':
+        tagColor = 'white'
+        tagText = 'Closed'
+        break
+      default:
+        tagColor = 'white'
+        tagText = 'Unknown'
+        break
+    }
+
+    return { tagColor, tagText }
+  }
+
+  const { tagColor, tagText } = getStatusTagProps()
+
   return (
     <CustomCard mb={{ base: '0px', lg: '20px' }} maxW="md" {...rest}>
       <Flex alignItems="center" justifyContent="space-between">
@@ -95,7 +125,7 @@ export default function ReviewCard(props: {
               {title}
             </Text>
             <Text color={textColorPrimary} fontSize="sm">
-              {name}
+              {name} <Tag as="span" color={tagColor} colorScheme='blue' size={'md'} variant='solid'>{tagText}</Tag>
             </Text>
             <Text color={textColorSecondary} fontSize="xs">
               {job}
