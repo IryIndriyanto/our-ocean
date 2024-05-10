@@ -16,7 +16,7 @@ import {
   Center,
   useDisclosure,
   useToast,
-  Tag
+  Tag,
 } from '@chakra-ui/react'
 import { BiLike, BiChat, BiShare } from 'react-icons/bi'
 import { BsThreeDotsVertical } from 'react-icons/bs'
@@ -26,6 +26,7 @@ import DeleteModal from '../maps/map-drawer/DeleteModal'
 import { SERVICE_URL } from '@/utils/constant'
 import { useState } from 'react'
 import useUser from '@/hooks/useUser'
+import EditIssueModal from './EditModal'
 
 export default function ReviewCard(props: {
   issueId: any
@@ -38,11 +39,13 @@ export default function ReviewCard(props: {
   status: string
   [x: string]: any
 }) {
-  const { issueId, image, avatar, name, job, text, title, status, ...rest } = props
+  const { issueId, image, avatar, name, job, text, title, status, ...rest } =
+    props
   const textColorPrimary = useColorModeValue('secondaryGray.900', 'white')
   const textColorSecondary = 'gray.400'
   const borderColor = useColorModeValue('white', '#111C44')
   const modal = useDisclosure()
+  const editModal = useDisclosure()
   const toast = useToast()
   const [isLoading, setIsLoading] = useState(false)
   const { user, isLogin } = useUser()
@@ -86,30 +89,35 @@ export default function ReviewCard(props: {
   const getStatusTagProps = () => {
     let tagColor: string = ''
     let tagText: string = ''
+    let tagColorScheme: string = ''
 
     switch (status) {
-      case 'Open':
+      case 'IssueStatus.OPEN':
         tagColor = 'white'
         tagText = 'Open'
+        tagColorScheme = 'green'
         break
-      case 'In Progress':
+      case 'IssueStatus.IN_PROGRESS':
         tagColor = 'white'
         tagText = 'In Progress'
+        tagColorScheme = 'yellow'
         break
-      case 'Closed':
+      case 'IssueStatus.CLOSED':
         tagColor = 'white'
         tagText = 'Closed'
+        tagColorScheme = 'red'
         break
       default:
         tagColor = 'white'
         tagText = 'Unknown'
+        tagColorScheme = 'gray'
         break
     }
 
-    return { tagColor, tagText }
+    return { tagColor, tagText, tagColorScheme }
   }
 
-  const { tagColor, tagText } = getStatusTagProps()
+  const { tagColor, tagText, tagColorScheme } = getStatusTagProps()
 
   return (
     <CustomCard mb={{ base: '0px', lg: '20px' }} maxW="md" {...rest}>
@@ -125,7 +133,16 @@ export default function ReviewCard(props: {
               {title}
             </Text>
             <Text color={textColorPrimary} fontSize="sm">
-              {name} <Tag as="span" color={tagColor} colorScheme='blue' size={'md'} variant='solid'>{tagText}</Tag>
+              {`${name}  •  `}
+              <Tag
+                as="span"
+                color={tagColor}
+                colorScheme={tagColorScheme}
+                size={'sm'}
+                variant="solid"
+              >
+                {tagText}
+              </Tag>
             </Text>
             <Text color={textColorSecondary} fontSize="xs">
               {job}
@@ -144,16 +161,13 @@ export default function ReviewCard(props: {
             </PopoverTrigger>
             <PopoverContent w={20}>
               <PopoverBody>
-                <DeleteModal
-                  isOpen={modal.isOpen}
-                  onClose={modal.onClose}
-                  item="issue"
-                  onDelete={handleDelete}
-                  isLoading={isLoading}
-                />
                 <VStack>
-                  <Center _hover={{ fontWeight: '600' }} cursor={'pointer'}>
-                    Edit
+                  <Center
+                    _hover={{ fontWeight: '600' }}
+                    cursor={'pointer'}
+                    onClick={editModal.onOpen}
+                  >
+                    Edit Status
                   </Center>
                   <Center
                     _hover={{ fontWeight: '600' }}
@@ -164,6 +178,18 @@ export default function ReviewCard(props: {
                     Delete
                   </Center>
                 </VStack>
+                <DeleteModal
+                  isOpen={modal.isOpen}
+                  onClose={modal.onClose}
+                  item="issue"
+                  onDelete={handleDelete}
+                  isLoading={isLoading}
+                />
+                <EditIssueModal
+                  isOpen={editModal.isOpen}
+                  onClose={editModal.onClose}
+                  issueId={issueId}
+                />
               </PopoverBody>
             </PopoverContent>
           </Popover>
