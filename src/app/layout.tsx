@@ -3,6 +3,7 @@ import AppWrappers from './Wrappers'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import 'leaflet/dist/leaflet.css'
+import 'dotenv/config'
 
 const inter = Inter({ subsets: ['latin'] })
 
