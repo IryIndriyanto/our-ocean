@@ -10,18 +10,7 @@ export function SidebarBrand() {
   return (
     <Flex alignItems="center" flexDirection="column">
       <Image src="/logo.png" alt="" p="10px 20px 10px 10px"></Image>
-      {/* <Flex
-			color={logoColor}
-			h='26px'
-			w='175px'
-			mb='5px'
-			justifyContent='center'
-			borderRadius='10px'
-			fontWeight='bold'
-			fontSize='28px'
-			>
-				Oceanesia
-			</Flex> */}
+
       <HSeparator m="20px" />
     </Flex>
   )

@@ -73,7 +73,7 @@ export default function SignInForm() {
 
         toast({
           title: 'Login Success',
-          description: 'Welcome to Oceanesia.',
+          description: 'Welcome to Our Ocean.',
           status: 'success',
           duration: 3000,
           isClosable: true,
@@ -200,7 +200,7 @@ export default function SignInForm() {
         <ModalContent m={'auto'}>
           <ModalBody>
             <Center px={6} py={4}>
-              <Spinner mx={2} /> Log in to Oceanesia...
+              <Spinner mx={2} /> Log in to Our Ocean...
             </Center>
           </ModalBody>
         </ModalContent>
