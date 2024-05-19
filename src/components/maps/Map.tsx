@@ -36,9 +36,10 @@ export default function Map() {
 
   const { locations } = useLocation()
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isLogin } = useUser()
 
   const [locationId, setLocationId] = useState(2)
-  const [locationName, setLocationName] = useState('Beach Name')
+  const [locationName, setLocationName] = useState('Select Location on Map')
   const [latitude, setLatitude] = useState(-6.1754)
   const [longitude, setLongitude] = useState(106.827)
   const [locationDescription, setLocationDescription] = useState(
@@ -100,7 +101,7 @@ export default function Map() {
             </Marker>
           ))}
         <Portal>
-          <AddLocation />
+          {isLogin && <AddLocation />}
           <LocateUserPosition />
         </Portal>
       </MapContainer>
@@ -132,6 +133,7 @@ import { LatLngExpression } from 'leaflet'
 import { useEffect } from 'react'
 import AddLocation from './add-location/AddLocation'
 import { IoMdLocate } from 'react-icons/io'
+import useUser from '@/hooks/useUser'
 
 function SearchedLocationMarker({ handleMarkerClick }: any) {
   const [position, setPosition] = useState<LatLngExpression | null>(null)
@@ -174,7 +176,7 @@ function LocateUserPosition() {
 
   return (
     <>
-      <ChakraTooltip placement='top' label="Locate">
+      <ChakraTooltip placement="top" label="Locate">
         <Button
           bottom={'100px'}
           left={{ base: '30px', xl: '300px' }}
