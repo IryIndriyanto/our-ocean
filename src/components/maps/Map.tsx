@@ -39,7 +39,7 @@ export default function Map() {
   const { isLogin } = useUser()
 
   const [locationId, setLocationId] = useState(2)
-  const [locationName, setLocationName] = useState('Beach Name')
+  const [locationName, setLocationName] = useState('Select Location on Map')
   const [latitude, setLatitude] = useState(-6.1754)
   const [longitude, setLongitude] = useState(106.827)
   const [locationDescription, setLocationDescription] = useState(
