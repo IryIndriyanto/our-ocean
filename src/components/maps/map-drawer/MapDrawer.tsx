@@ -155,7 +155,7 @@ const MapDrawer = ({
             </Flex>
           </DrawerBody>
           <DrawerFooter>
-            <Box>&copy; Oceanesia 2024</Box>
+            <Box>&copy; Our Ocean 2024</Box>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

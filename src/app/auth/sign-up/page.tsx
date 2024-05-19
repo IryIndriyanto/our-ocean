@@ -143,7 +143,7 @@ export default function SignIn() {
             fontSize="sm"
             ms={{ base: '0px', md: '0px' }}
             type="email"
-            placeholder="mail@oceanesia.com"
+            placeholder="mail@ourocean.com"
             mb="24px"
             fontWeight="500"
             size="lg"
